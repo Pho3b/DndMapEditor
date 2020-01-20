@@ -1,0 +1,12 @@
+{
+  "name": "dndmapeditor",
+  "version": "1.0.0",
+  "description": "A Dungeons and Dragons map editr",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "git": "https://github.com/Pho3b/DndMapEditor.git",
+  "author": "Andrea Rinaldi",
+  "license": "ISC"
+}
