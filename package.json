@@ -2,7 +2,7 @@
   "name": "dndmapeditor",
   "version": "1.0.0",
   "description": "A Dungeons and Dragons map editr",
-  "main": "index.js",
+  "main": "js/index.js",
   "scripts": {
     "test": "test"
   },
@@ -16,5 +16,4 @@
   "devDependencies": {
     "typescript": "^3.7.5"
   }
-
 }
