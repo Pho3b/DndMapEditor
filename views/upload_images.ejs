@@ -34,13 +34,12 @@
             <!-- END: NavBar -->
 
             <!-- Images Upload Form -->
-            <form>
+            <form action="/images_uploader" method="POST" enctype="multipart/form-data">
                 <div class="row mb-lg-0">
                     <div class="col-lg-2"></div>
                     <div class="input-group mb-3 col-lg-8">
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="images_upload">
-                            <label class="custom-file-label" for="images_upload">Choose file</label>
+                            <input type="file" name="avatar"  id="images_upload" multiple>
                         </div>
                     </div>
                     <div class="col-lg-2"></div>
@@ -50,14 +49,14 @@
                     <div class="form-group col-lg-8">
                         <label for="sel1">Select the destination folder</label>
                         <select class="form-control" id="sel1" name="sellist1">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
+                            <% for (var i = 0; i < folders.length; i++) { %>
+                                <option value="<%= i %>"><%= folders[i] %></option>
+                            <% } %>
                         </select>
                     </div>
                     <div class="col-lg-2"></div>
                 </div>
+                <input type="submit">
             </form>
             <!-- END: Images Upload Form -->
 
@@ -71,6 +70,7 @@
                 <div class="col-lg-3"></div>
             </div>
         </div>
+
 
         <!-- Bootstrap Script Dependencies -->
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
