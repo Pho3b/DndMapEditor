@@ -7,6 +7,7 @@
 
         <!-- Bootstrap Style Dependencies -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/my-style.css">
     </head>
     <body>
         <div class="container-fluid h-100">
@@ -34,12 +35,12 @@
             <!-- END: NavBar -->
 
             <!-- Images Upload Form -->
-            <form action="/images_uploader" method="POST" enctype="multipart/form-data">
+            <form action="/images_uploader" method="POST" enctype="multipart/form-data" id="images_upload_form">
                 <div class="row mb-lg-0">
                     <div class="col-lg-2"></div>
                     <div class="input-group mb-3 col-lg-8">
                         <div class="custom-file">
-                            <input type="file" name="avatar"  id="images_upload" multiple>
+                            <input type="file" name="images" class="form-control-file rounded-border-input"  id="images_upload" multiple>
                         </div>
                     </div>
                     <div class="col-lg-2"></div>
@@ -47,28 +48,33 @@
                 <div class="row mb-lg-2">
                     <div class="col-lg-2"></div>
                     <div class="form-group col-lg-8">
-                        <label for="sel1">Select the destination folder</label>
-                        <select class="form-control" id="sel1" name="sellist1">
+                        <label for="sel1">Select the destination folder:</label>
+                        <select class="form-control" id="sel1" name="folder_name">
                             <% for (var i = 0; i < folders.length; i++) { %>
-                                <option value="<%= i %>"><%= folders[i] %></option>
+                                <option value="<%= folders[i] %>"><%= folders[i] %></option>
                             <% } %>
                         </select>
                     </div>
                     <div class="col-lg-2"></div>
                 </div>
-                <input type="submit">
+                <div class="row mb-lg-5">
+                    <div class="col-lg-5"></div>
+                    <input class="btn btn-success col-lg-2" type="button" id="images_submit_btn" value="Submit">
+                    <div class="col-lg-5"></div>
+                </div>
             </form>
             <!-- END: Images Upload Form -->
-
-            <div class="row">
-                <div class="col-lg-3"></div>
-                <div class="alert alert-success col-lg-6" id="success_alert">
-                    <p class="text-center mb-0">
-                        <strong>Success!</strong> Images correctly uploaded.
-                    </p>
+            <% if(success === "true") { %>
+                <div class="row">
+                    <div class="col-lg-4"></div>
+                    <div class="alert alert-success col-lg-4" id="success_alert">
+                        <p class="text-center mb-0">
+                            <strong>Success!</strong> Images correctly uploaded.
+                        </p>
+                    </div>
+                    <div class="col-lg-4"></div>
                 </div>
-                <div class="col-lg-3"></div>
-            </div>
+            <% } %>
         </div>
 
 
@@ -78,6 +84,6 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
         <!-- My Scripts -->
-        <script src="/js/timer.js"></script>
+        <script src="/js/utilities_upload_images.js"></script>
     </body>
 </html>
