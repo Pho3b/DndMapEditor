@@ -2,3 +2,8 @@
     border-radius: 5px;
     border: 1px solid #ced4da;
 }
+
+.gallery_image {
+    margin: 5px;
+    border: 1px solid #ced4da;
+}

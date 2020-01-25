@@ -1,6 +1,6 @@
 "use strinct";
 
-document.getElementById('images_submit_btn').addEventListener('click', checkIfSelectedValues);
+init();
 
 function hideElement(seconds, idString) {
     let element = document.getElementById(idString);
@@ -23,4 +23,9 @@ function checkIfSelectedValues() {
     } else {
         document.getElementById('images_upload_form').submit();
     }
+}
+
+
+function init() {
+    document.getElementById('images_submit_btn').addEventListener('click', checkIfSelectedValues);
 }
