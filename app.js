@@ -46,5 +46,6 @@ app.post('/images_uploader', function(req, res) {
 app.use('/img', express.static(__dirname + '/images/'));
 app.use('/css', express.static(__dirname + '/css/'));
 app.use('/js', express.static(__dirname + '/js/'));
+app.use('/ts', express.static(__dirname + '/ts/'));
 
 module.exports = app;

@@ -1,5 +1,0 @@
-class Importer {
-    filename: string;
-
-
-}

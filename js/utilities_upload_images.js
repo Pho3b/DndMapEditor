@@ -17,7 +17,7 @@ function hideElement(seconds, idString) {
 hideElement(2, 'success_alert');
 
 
-function checkIfSelectedValues() {
+function checkIfAtLeastOneImageIsSelected() {
     if (document.getElementById('images_upload').value === "") {
         alert('Select at least one image');
     } else {
@@ -27,5 +27,5 @@ function checkIfSelectedValues() {
 
 
 function init() {
-    document.getElementById('images_submit_btn').addEventListener('click', checkIfSelectedValues);
+    document.getElementById('images_submit_btn').addEventListener('click', checkIfAtLeastOneImageIsSelected);
 }

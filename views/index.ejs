@@ -7,30 +7,38 @@
 
         <!-- Bootstrap Style Dependencies -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
         <link rel="stylesheet" href="/css/my-style.css">
     </head>
     <body>
         <div class="container-fluid h-100">
             <div class="row bg-info h-75">
-                <p>Canvas</p>
-                <canvas></canvas>
-            </div>
-            <div class="row h-25">
-                <div class="col-lg-2 bg-success">
-                    <div class="row">
-                        <a class="btn-info" href="/upload_images">Upload Images</a>
+                <div class="col-md-2">
+                    <div class="row mt-4 pl-2">
+                        <a class="upload_images" href="/upload_images"><i class="fas fa-cloud-upload-alt"></i> Upload Images</a>
+                    </div>
+                    <div class="row mt-2 pl-2">
+                        <div class="form-check">
+                            <% for (var i = 0; i < folders.length; i++) { %>
+                                <div class="radio">
+                                    <label><input value="<%= folders[i] %>" type="radio" name="optradio"class="folders_radio_btn" checked><%= folders[i] %></label>
+                                </div>
+                            <% } %>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-2 bg-warning">
-                    <p>Image Showgallery </p>
-                        <% for (var i = 0; i < folders.length; i++) { %>
-                            <div class="radio">
-                                <label><input value="<%= folders[i] %>" type="radio" name="optradio"class="folders_radio_btn" checked><%= folders[i] %></label>
-                            </div>
-                        <% } %>
+                <div class="col-md-8 p-0">
+                    <canvas id="canvas" width="600" height="600"
+                            style="border: 1px solid black;">
+                    </canvas>
                 </div>
-                <div class="col-lg-8 bg-warning">
-                    <div class=" mt-2 mb-1" id="images_gallery"></div>
+                <div class="col-md-2"></div>
+            </div>
+            <div class="row h-25">
+                <div class="col-md-12 bg-warning" style="height: 150px;">
+                    <div class=" mt-2 mb-1" id="images_gallery">
+                          <!--Images Gallery Here-->
+                    </div>
                 </div>
             </div>
         </div>
@@ -42,5 +50,6 @@
 
         <!-- My Scripts -->
         <script src="/js/utilities_index.js"></script>
+        <script src="/ts/main.js"></script>
     </body>
 </html>

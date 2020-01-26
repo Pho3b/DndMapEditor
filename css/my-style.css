@@ -7,3 +7,18 @@
     margin: 5px;
     border: 1px solid #ced4da;
 }
+
+.upload_images {
+    display: block;
+    padding: .5rem 1rem;
+    color: rgba(255,255,255,.5);
+}
+
+.folders_list {
+    display: inline;
+    padding: .5rem 1rem;
+}
+
+.folders_radio_btn {
+    margin-right: .5rem;
+}
