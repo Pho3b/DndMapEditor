@@ -22,8 +22,14 @@ export default class EventHandlers {
         //     .addEventListener("click", this.clearEventHandler);
     };
 
-    private pressEventHandler = (e: MouseEvent | TouchEvent) => {
-        console.log("ciao");
+    private pressEventHandler = (e: MouseEvent) => {
+        var rect = this.canvas.getBoundingClientRect();
+        let res =  {
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top
+        };
+
+        console.log(res);
     };
 }
 

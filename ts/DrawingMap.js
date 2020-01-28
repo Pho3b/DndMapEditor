@@ -2,7 +2,6 @@ import EventHandlers from "./EventHandlers.js";
 class DrawingMap {
     constructor() {
         this.canvas = this.initializeCanvas();
-        this.canvas.width = 800;
         this.context = this.initializeContext(this.canvas);
         this.eventHandlers = new EventHandlers(this.canvas);
     }

@@ -1,7 +1,12 @@
 export default class EventHandlers {
     constructor(canvas) {
         this.pressEventHandler = (e) => {
-            console.log("ciao");
+            var rect = this.canvas.getBoundingClientRect();
+            let res = {
+                x: e.clientX - rect.left,
+                y: e.clientY - rect.top
+            };
+            console.log(res);
         };
         this.canvas = canvas;
         this.initEventHandlers();
