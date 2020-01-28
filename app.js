@@ -11,7 +11,7 @@ const cookieParser = require('cookie-parser');
 
 
 app.set('view engine', 'ejs');
-app.set('views', __dirname + '\\views');
+app.set('views', __dirname + '/views');
 app.use(
     bodyParser.urlencoded({
         extended: false
@@ -22,8 +22,8 @@ app.use(
 );
 
 
-app.listen(3000, function () {
-    console.log('App listening on port 3000!');
+app.listen(1200, function () {
+    console.log('App listening on port 1200!');
 });
 
 app.get('/', function(req, res) {
