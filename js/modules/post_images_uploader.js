@@ -7,12 +7,12 @@ module.exports = {
         let chosen_folder = req.body.folder_name;
         let success_file_moved;
 
-        try{
+        try {
             let uploaded_images = req.files.images;
             let current_img_name;
 
             if (Array.isArray(uploaded_images)) {
-                for(let i = 0; i < uploaded_images.length; i++) {
+                for (let i = 0; i < uploaded_images.length; i++) {
                     current_img_name = uploaded_images[i]['name'];
                     uploaded_images[i].mv(this.base_path + chosen_folder + '/' + current_img_name);
                 }

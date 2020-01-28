@@ -7,7 +7,7 @@ const post_images_uploader = require('./js/modules/post_images_uploader');
 const retrieve_files = require('./js/modules/retrieve_files');
 const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
-
+const port = 3000;
 
 
 app.set('view engine', 'ejs');
@@ -22,24 +22,24 @@ app.use(
 );
 
 
-app.listen(1200, function () {
-    console.log('App listening on port 1200!');
+app.listen(port, function () {
+    console.log('App listening on port ' + port + '!');
 });
 
-app.get('/', function(req, res) {
-    res.render('index', { folders: utilities.retrieveImagesFoldersNames()});
+app.get('/', function (req, res) {
+    res.render('index', {folders: utilities.retrieveImagesFoldersNames()});
 });
 
-app.get('/upload_images', function(req, res) {
+app.get('/upload_images', function (req, res) {
     let success = req.query.success || false;
-    res.render('upload_images', { folders: utilities.retrieveImagesFoldersNames(), success: success });
+    res.render('upload_images', {folders: utilities.retrieveImagesFoldersNames(), success: success});
 });
 
-app.get('/retrieve_files', function(req, res) {
+app.get('/retrieve_files', function (req, res) {
     res.send(JSON.stringify(retrieve_files.list_files(req)));
 });
 
-app.post('/images_uploader', function(req, res) {
+app.post('/images_uploader', function (req, res) {
     post_images_uploader.upload_images(req, res);
 });
 

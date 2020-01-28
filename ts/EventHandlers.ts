@@ -1,13 +1,18 @@
+import CanvasComponent from "./CanvasComponent.js";
+
 export default class EventHandlers {
     private readonly canvas: HTMLCanvasElement;
+    private canvasComponent: CanvasComponent;
 
-    constructor(canvas: HTMLCanvasElement) {
-        this.canvas = canvas;
 
-        this.initEventHandlers();
+    constructor() {
+        this.canvasComponent = CanvasComponent.getInstance();
+        this.canvas = this.canvasComponent.canvas;
+
+        this.initEventHandlers(this.canvas);
     }
 
-    private initEventHandlers() {
+    public initEventHandlers(canvas: HTMLCanvasElement) {
         this.canvas.addEventListener("mousedown", this.pressEventHandler);
         // canvas.addEventListener("mousemove", this.dragEventHandler);
         // canvas.addEventListener("mouseup", this.releaseEventHandler);
@@ -23,13 +28,14 @@ export default class EventHandlers {
     };
 
     private pressEventHandler = (e: MouseEvent) => {
-        var rect = this.canvas.getBoundingClientRect();
+        let rect = this.canvas.getBoundingClientRect();
+
         let res =  {
             x: e.clientX - rect.left,
             y: e.clientY - rect.top
         };
 
-        console.log(res);
+        this.canvasComponent.drawSquare(res.x, res.y, 10, 10);
     };
 }
 
