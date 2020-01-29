@@ -4,7 +4,7 @@ export default class CanvasComponent {
     private static instance: CanvasComponent;
     public canvas: HTMLCanvasElement;
     public ctx: CanvasRenderingContext2D;
-    public squaresMatrix: any[];
+    public squaresMatrix: Square[][];
     public squareWidth: number;
     public squareHeight: number;
 
@@ -14,8 +14,7 @@ export default class CanvasComponent {
         this.ctx = this.initContext(this.canvas);
         this.squareWidth = this.canvas.width / 10;
         this.squareHeight = this.canvas.width / 10;
-        this.squaresMatrix = [];
-        this.drawGrid();
+        this.squaresMatrix = this.drawGrid();
     }
 
     static getInstance() : CanvasComponent {
@@ -55,8 +54,9 @@ export default class CanvasComponent {
         return new Square(x, y, this);
     }
 
-    public drawGrid() {
+    public drawGrid() : Square[][] {
         let column: Square[];
+        let res: Square[][] = [];
 
         for (let x = 0; x < this.canvas.width; x += this.squareWidth) {
             column = [this.drawSquare(x, 0, this.squareWidth, this.squareHeight)];
@@ -64,10 +64,8 @@ export default class CanvasComponent {
             for (let y = this.squareHeight; y < this.canvas.height; y += this.squareHeight) {
                 column.push(this.drawSquare(x, y, this.squareWidth, this.squareHeight));
             }
-
-            this.squaresMatrix.push(column);
+            res.push(column);
         }
-        console.log(this.squaresMatrix);
+        return res;
     }
-
 }

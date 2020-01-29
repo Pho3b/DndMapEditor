@@ -6,4 +6,8 @@ export default class Square {
         this.xMax = xMin + this.canvasComponent.squareWidth;
         this.yMax = yMin + this.canvasComponent.squareHeight;
     }
+    colorSquare(color = '#000000') {
+        this.canvasComponent.ctx.fillStyle = color;
+        this.canvasComponent.ctx.fillRect(this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
+    }
 }

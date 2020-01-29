@@ -1,13 +1,18 @@
 import CanvasComponent from "./CanvasComponent.js";
+import MousePos from "./MousePos.js";
+import AlgoComponent from "./AlgoComponent.js";
+import Square from "./Square.js";
 
 export default class EventHandlers {
     private readonly canvas: HTMLCanvasElement;
     private canvasComponent: CanvasComponent;
+    private clientRect: ClientRect;
 
 
     constructor() {
         this.canvasComponent = CanvasComponent.getInstance();
         this.canvas = this.canvasComponent.canvas;
+        this.clientRect = this.canvas.getBoundingClientRect();
 
         this.initEventHandlers(this.canvas);
     }
@@ -30,12 +35,17 @@ export default class EventHandlers {
     private pressEventHandler = (e: MouseEvent) => {
         let rect = this.canvas.getBoundingClientRect();
 
-        let res =  {
+        let mousePos: MousePos =  {
             x: e.clientX - rect.left,
             y: e.clientY - rect.top
         };
+        let clickedSquare: Square | undefined = AlgoComponent.binarySearchOnMatrix(this.canvasComponent.squaresMatrix, mousePos);
 
-        this.canvasComponent.drawSquare(res.x, res.y, 10, 10);
+        if (clickedSquare !== undefined) {
+            clickedSquare.colorSquare();
+        } else {
+            console.log("Undefined square, which one should i color ?");
+        }
     };
 }
 

@@ -5,8 +5,7 @@ export default class CanvasComponent {
         this.ctx = this.initContext(this.canvas);
         this.squareWidth = this.canvas.width / 10;
         this.squareHeight = this.canvas.width / 10;
-        this.squaresMatrix = [];
-        this.drawGrid();
+        this.squaresMatrix = this.drawGrid();
     }
     static getInstance() {
         if (!CanvasComponent.instance) {
@@ -38,13 +37,14 @@ export default class CanvasComponent {
     }
     drawGrid() {
         let column;
+        let res = [];
         for (let x = 0; x < this.canvas.width; x += this.squareWidth) {
             column = [this.drawSquare(x, 0, this.squareWidth, this.squareHeight)];
             for (let y = this.squareHeight; y < this.canvas.height; y += this.squareHeight) {
                 column.push(this.drawSquare(x, y, this.squareWidth, this.squareHeight));
             }
-            this.squaresMatrix.push(column);
+            res.push(column);
         }
-        console.log(this.squaresMatrix);
+        return res;
     }
 }

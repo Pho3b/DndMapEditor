@@ -1,16 +1,24 @@
 import CanvasComponent from "./CanvasComponent.js";
+import AlgoComponent from "./AlgoComponent.js";
 export default class EventHandlers {
     constructor() {
         this.pressEventHandler = (e) => {
             let rect = this.canvas.getBoundingClientRect();
-            let res = {
+            let mousePos = {
                 x: e.clientX - rect.left,
                 y: e.clientY - rect.top
             };
-            this.canvasComponent.drawSquare(res.x, res.y, 10, 10);
+            let clickedSquare = AlgoComponent.binarySearchOnMatrix(this.canvasComponent.squaresMatrix, mousePos);
+            if (clickedSquare !== undefined) {
+                clickedSquare.colorSquare();
+            }
+            else {
+                console.log("Undefined square, which one should i color ?");
+            }
         };
         this.canvasComponent = CanvasComponent.getInstance();
         this.canvas = this.canvasComponent.canvas;
+        this.clientRect = this.canvas.getBoundingClientRect();
         this.initEventHandlers(this.canvas);
     }
     initEventHandlers(canvas) {
