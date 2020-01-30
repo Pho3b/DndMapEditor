@@ -45,6 +45,7 @@ export default class CanvasComponent {
             }
             res.push(column);
         }
+        console.log(res);
         return res;
     }
 }

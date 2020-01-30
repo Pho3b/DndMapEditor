@@ -39,10 +39,12 @@ export default class EventHandlers {
             x: e.clientX - rect.left,
             y: e.clientY - rect.top
         };
-        let clickedSquare: Square | undefined = AlgoComponent.binarySearchOnMatrix(this.canvasComponent.squaresMatrix, mousePos);
+        // let clickedSquare: Square | undefined = AlgoComponent.binarySearchOnMatrix(this.canvasComponent.squaresMatrix, mousePos);
+        let clickedSquare: Square | undefined = AlgoComponent.findClickedSquare(this.canvasComponent.squaresMatrix, mousePos, this.canvasComponent.squareWidth);
 
         if (clickedSquare !== undefined) {
-            clickedSquare.colorSquare();
+            // clickedSquare.colorSquare();
+            clickedSquare.setImage();
         } else {
             console.log("Undefined square, which one should i color ?");
         }
