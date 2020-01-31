@@ -2,12 +2,13 @@ import CanvasComponent from "./CanvasComponent.js";
 import MousePos from "./MousePos.js";
 import AlgoComponent from "./AlgoComponent.js";
 import Square from "./Square.js";
+import ImagesLevelComponent, {ImagesLevel} from "./ImagesLevelComponent.js";
 
 export default class EventHandlers {
+    private static instance: EventHandlers;
     private readonly canvas: HTMLCanvasElement;
     private canvasComponent: CanvasComponent;
     private clientRect: ClientRect;
-
 
     constructor() {
         this.canvasComponent = CanvasComponent.getInstance();
@@ -17,8 +18,23 @@ export default class EventHandlers {
         this.initEventHandlers(this.canvas);
     }
 
+    public static getInstance() : EventHandlers {
+         if (!this.instance) {
+             this.instance = new EventHandlers();
+         }
+         return this.instance;
+    }
+
     public initEventHandlers(canvas: HTMLCanvasElement) {
-        this.canvas.addEventListener("mousedown", this.pressEventHandler);
+        this.canvas.addEventListener("mousedown", this.canvasMouseDownEventHandler);
+
+        let counter = 0;
+        // @ts-ignore
+        for (let radioBtn of ImagesLevelComponent.levelRadioBtns) {
+            radioBtn.addEventListener("click", this.leveRadioClickEventHandler);
+            counter++;
+        }
+
         // canvas.addEventListener("mousemove", this.dragEventHandler);
         // canvas.addEventListener("mouseup", this.releaseEventHandler);
         // canvas.addEventListener("mouseout", this.cancelEventHandler);
@@ -32,7 +48,7 @@ export default class EventHandlers {
         //     .addEventListener("click", this.clearEventHandler);
     };
 
-    private pressEventHandler = (e: MouseEvent) => {
+    private canvasMouseDownEventHandler = (e: MouseEvent) => {
         let rect = this.canvas.getBoundingClientRect();
 
         let mousePos: MousePos =  {
@@ -49,5 +65,9 @@ export default class EventHandlers {
             console.log("Undefined square, which one should i color ?");
         }
     };
-}
 
+    private leveRadioClickEventHandler = (e: MouseEvent) => {
+        // @ts-ignore
+        ImagesLevelComponent.selectedLevel = parseInt(e.target.id);
+    };
+}

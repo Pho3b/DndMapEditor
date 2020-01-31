@@ -1,3 +1,4 @@
+import ImagesLevelComponent, { ImagesLevel } from "./ImagesLevelComponent.js";
 export default class Square {
     constructor(xMin, yMin, canvasComponent) {
         this.canvasComponent = canvasComponent;
@@ -5,6 +6,8 @@ export default class Square {
         this.yMin = yMin;
         this.xMax = xMin + this.canvasComponent.squareWidth;
         this.yMax = yMin + this.canvasComponent.squareHeight;
+        this.level1Img = new Image();
+        this.level2Img = new Image();
         this.loadImages();
     }
     colorSquare(color = '#000000') {
@@ -12,15 +15,26 @@ export default class Square {
         this.canvasComponent.ctx.fillRect(this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
     }
     loadImages() {
-        this.level1Img = new Image();
-        this.level1Img.src = '/img/dndIcon.png';
-        this.level2Img = new Image();
-        this.level2Img.src = '/img/Items/test.png';
+        this.level1Img.src = '';
+        this.level2Img.src = '';
         this.level1Img.onload = this.setImage();
         this.level2Img.onload = this.setImage();
     }
     setImage() {
-        this.canvasComponent.ctx.drawImage(this.level2Img, this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
-        this.canvasComponent.ctx.drawImage(this.level1Img, this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
+        console.log("test");
+        console.log(ImagesLevelComponent.selectedLevel);
+        if (ImagesLevelComponent.selectedLevel === ImagesLevel.level1) {
+            this.level1Img.src = '/img/dndIcon.png';
+        }
+        if (ImagesLevelComponent.selectedLevel === ImagesLevel.level2) {
+            this.level2Img.src = '/img/Items/test.png';
+        }
+        this.drawImages();
+    }
+    drawImages() {
+        if (this.level1Img.src !== '')
+            this.canvasComponent.ctx.drawImage(this.level1Img, this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
+        if (this.level2Img.src !== '')
+            this.canvasComponent.ctx.drawImage(this.level2Img, this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
     }
 }
