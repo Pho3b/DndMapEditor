@@ -1,13 +1,7 @@
 export default class ImagesGalleryComponent {
     constructor() {
-        this.visibleImages = undefined;
         this.radio_buttons = document.getElementsByClassName('folders_radio_btn');
         this.initEventHandlers();
-    }
-    static imageClickEventHandler(event) {
-        let imgGalleyComponent = new ImagesGalleryComponent();
-        ImagesGalleryComponent.selectedImage = event.target;
-        imgGalleyComponent.colorFocusedImageBorder();
     }
     populateShowGallery(event) {
         let folder = event.target.value;
@@ -35,13 +29,17 @@ export default class ImagesGalleryComponent {
         xhrReq.open("GET", "/retrieve_files?folder=" + folder);
         xhrReq.send();
     }
+    static imageClickEventHandler(event) {
+        ImagesGalleryComponent.selectedImage = event.target;
+        ImagesGalleryComponent.colorFocusedImageBorder();
+    }
     initEventHandlers() {
         // @ts-ignore
         for (let radioBtn of this.radio_buttons) {
             radioBtn.addEventListener('click', this.populateShowGallery);
         }
     }
-    colorFocusedImageBorder() {
+    static colorFocusedImageBorder() {
         if (ImagesGalleryComponent.selectedImage !== undefined) {
             let galleryImages = document.getElementsByClassName('gallery_image');
             // @ts-ignore
@@ -55,3 +53,4 @@ export default class ImagesGalleryComponent {
         }
     }
 }
+ImagesGalleryComponent.selectedImage = undefined;

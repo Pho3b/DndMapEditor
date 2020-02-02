@@ -1,5 +1,6 @@
 import CanvasComponent from "./CanvasComponent.js";
 import ImagesLevelComponent, {ImagesLevel} from "./ImagesLevelComponent.js";
+import ImagesGalleryComponent from "./ImagesGalleryComponent.js";
 
 export default class Square {
     private canvasComponent: CanvasComponent;
@@ -39,11 +40,20 @@ export default class Square {
         console.log("test");
         console.log(ImagesLevelComponent.selectedLevel);
         if (ImagesLevelComponent.selectedLevel === ImagesLevel.level1) {
-            this.level1Img.src = '/img/dndIcon.png'
+            if (this.level1Img.src === '') {
+                this.level1Img.src = ImagesGalleryComponent.selectedImage?.src ?? '';
+            } else {
+                // Se uguale a quella che sto provando a settare cancello sennò inserisco la nuova
+                this.level1Img.src = ''
+            }
         }
 
         if (ImagesLevelComponent.selectedLevel === ImagesLevel.level2) {
-            this.level2Img.src = '/img/Items/test.png';
+            if (this.level2Img.src === '') {
+                this.level2Img.src = ImagesGalleryComponent.selectedImage?.src ?? '';
+            } else {
+                this.level2Img.src = ''
+            }
         }
 
         this.drawImages();

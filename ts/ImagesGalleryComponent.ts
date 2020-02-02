@@ -1,20 +1,11 @@
 export default class ImagesGalleryComponent {
-    private visibleImages: HTMLCollectionOf<Element> | undefined = undefined;
     private readonly radio_buttons: HTMLCollectionOf<Element>;
-    public static selectedImage: HTMLImageElement | undefined;
+    public static selectedImage: HTMLImageElement | undefined = undefined;
 
 
     constructor() {
         this.radio_buttons = document.getElementsByClassName('folders_radio_btn');
         this.initEventHandlers();
-    }
-
-    private static imageClickEventHandler(event: MouseEvent) {
-        let imgGalleyComponent: ImagesGalleryComponent = new ImagesGalleryComponent();
-        ImagesGalleryComponent.selectedImage = event.target as HTMLImageElement;
-
-        imgGalleyComponent.colorFocusedImageBorder();
-
     }
 
     private populateShowGallery(event: MouseEvent) : any {
@@ -49,6 +40,11 @@ export default class ImagesGalleryComponent {
         xhrReq.send();
     }
 
+    private static imageClickEventHandler(event: MouseEvent) {
+        ImagesGalleryComponent.selectedImage = event.target as HTMLImageElement;
+        ImagesGalleryComponent.colorFocusedImageBorder();
+    }
+
     private initEventHandlers() {
         // @ts-ignore
         for (let radioBtn of this.radio_buttons) {
@@ -56,7 +52,7 @@ export default class ImagesGalleryComponent {
         }
     }
 
-    private colorFocusedImageBorder() : void {
+    private static colorFocusedImageBorder() : void {
         if (ImagesGalleryComponent.selectedImage !== undefined) {
             let galleryImages: HTMLCollectionOf<HTMLImageElement> = document.getElementsByClassName('gallery_image') as HTMLCollectionOf<HTMLImageElement>;
 
