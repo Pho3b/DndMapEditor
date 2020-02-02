@@ -1,9 +1,8 @@
 import CanvasComponent from "./CanvasComponent.js";
 import AlgoComponent from "./AlgoComponent.js";
-import ImagesLevelComponent from "./ImagesLevelComponent.js";
-export default class EventHandlers {
+export default class CanvasEventHandlers {
     constructor() {
-        this.canvasMouseDownEventHandler = (e) => {
+        this.mouseDownEventHandler = (e) => {
             let rect = this.canvas.getBoundingClientRect();
             let mousePos = {
                 x: e.clientX - rect.left,
@@ -12,16 +11,11 @@ export default class EventHandlers {
             // let clickedSquare: Square | undefined = AlgoComponent.binarySearchOnMatrix(this.canvasComponent.squaresMatrix, mousePos);
             let clickedSquare = AlgoComponent.findClickedSquare(this.canvasComponent.squaresMatrix, mousePos, this.canvasComponent.squareWidth);
             if (clickedSquare !== undefined) {
-                // clickedSquare.colorSquare();
                 clickedSquare.setImage();
             }
             else {
                 console.log("Undefined square, which one should i color ?");
             }
-        };
-        this.leveRadioClickEventHandler = (e) => {
-            // @ts-ignore
-            ImagesLevelComponent.selectedLevel = parseInt(e.target.id);
         };
         this.canvasComponent = CanvasComponent.getInstance();
         this.canvas = this.canvasComponent.canvas;
@@ -30,18 +24,12 @@ export default class EventHandlers {
     }
     static getInstance() {
         if (!this.instance) {
-            this.instance = new EventHandlers();
+            this.instance = new CanvasEventHandlers();
         }
         return this.instance;
     }
     initEventHandlers(canvas) {
-        this.canvas.addEventListener("mousedown", this.canvasMouseDownEventHandler);
-        let counter = 0;
-        // @ts-ignore
-        for (let radioBtn of ImagesLevelComponent.levelRadioBtns) {
-            radioBtn.addEventListener("click", this.leveRadioClickEventHandler);
-            counter++;
-        }
+        this.canvas.addEventListener("mousedown", this.mouseDownEventHandler);
         // canvas.addEventListener("mousemove", this.dragEventHandler);
         // canvas.addEventListener("mouseup", this.releaseEventHandler);
         // canvas.addEventListener("mouseout", this.cancelEventHandler);

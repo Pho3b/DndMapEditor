@@ -1,5 +1,4 @@
 import CanvasComponent from "./CanvasComponent.js";
-import MousePos from "./MousePos.js";
 import ImagesLevelComponent, {ImagesLevel} from "./ImagesLevelComponent.js";
 
 export default class Square {
@@ -20,8 +19,6 @@ export default class Square {
         this.yMax = yMin + this.canvasComponent.squareHeight;
         this.level1Img = new Image();
         this.level2Img = new Image();
-
-        this.loadImages();
     }
 
     public colorSquare(color: string = '#000000') {
@@ -30,11 +27,12 @@ export default class Square {
     }
 
     public loadImages() {
+        // Add switch
         this.level1Img.src = '';
         this.level2Img.src = '';
 
         this.level1Img.onload = this.setImage();
-        this.level2Img.onload = this.setImage();
+        this.level2Img.onload =  this.setImage();
     }
 
     public setImage() : any {

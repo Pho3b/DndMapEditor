@@ -2,10 +2,9 @@ import CanvasComponent from "./CanvasComponent.js";
 import MousePos from "./MousePos.js";
 import AlgoComponent from "./AlgoComponent.js";
 import Square from "./Square.js";
-import ImagesLevelComponent, {ImagesLevel} from "./ImagesLevelComponent.js";
 
-export default class EventHandlers {
-    private static instance: EventHandlers;
+export default class CanvasEventHandlers {
+    private static instance: CanvasEventHandlers;
     private readonly canvas: HTMLCanvasElement;
     private canvasComponent: CanvasComponent;
     private clientRect: ClientRect;
@@ -18,22 +17,16 @@ export default class EventHandlers {
         this.initEventHandlers(this.canvas);
     }
 
-    public static getInstance() : EventHandlers {
+    public static getInstance() : CanvasEventHandlers {
          if (!this.instance) {
-             this.instance = new EventHandlers();
+             this.instance = new CanvasEventHandlers();
          }
          return this.instance;
     }
 
     public initEventHandlers(canvas: HTMLCanvasElement) {
-        this.canvas.addEventListener("mousedown", this.canvasMouseDownEventHandler);
+        this.canvas.addEventListener("mousedown", this.mouseDownEventHandler);
 
-        let counter = 0;
-        // @ts-ignore
-        for (let radioBtn of ImagesLevelComponent.levelRadioBtns) {
-            radioBtn.addEventListener("click", this.leveRadioClickEventHandler);
-            counter++;
-        }
 
         // canvas.addEventListener("mousemove", this.dragEventHandler);
         // canvas.addEventListener("mouseup", this.releaseEventHandler);
@@ -48,7 +41,7 @@ export default class EventHandlers {
         //     .addEventListener("click", this.clearEventHandler);
     };
 
-    private canvasMouseDownEventHandler = (e: MouseEvent) => {
+    private mouseDownEventHandler = (e: MouseEvent) => {
         let rect = this.canvas.getBoundingClientRect();
 
         let mousePos: MousePos =  {
@@ -59,15 +52,9 @@ export default class EventHandlers {
         let clickedSquare: Square | undefined = AlgoComponent.findClickedSquare(this.canvasComponent.squaresMatrix, mousePos, this.canvasComponent.squareWidth);
 
         if (clickedSquare !== undefined) {
-            // clickedSquare.colorSquare();
             clickedSquare.setImage();
         } else {
             console.log("Undefined square, which one should i color ?");
         }
-    };
-
-    private leveRadioClickEventHandler = (e: MouseEvent) => {
-        // @ts-ignore
-        ImagesLevelComponent.selectedLevel = parseInt(e.target.id);
     };
 }

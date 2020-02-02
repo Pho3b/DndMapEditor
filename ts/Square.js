@@ -8,13 +8,13 @@ export default class Square {
         this.yMax = yMin + this.canvasComponent.squareHeight;
         this.level1Img = new Image();
         this.level2Img = new Image();
-        this.loadImages();
     }
     colorSquare(color = '#000000') {
         this.canvasComponent.ctx.fillStyle = color;
         this.canvasComponent.ctx.fillRect(this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
     }
     loadImages() {
+        // Add switch
         this.level1Img.src = '';
         this.level2Img.src = '';
         this.level1Img.onload = this.setImage();
