@@ -9,6 +9,7 @@ export default class CanvasEventHandlers {
     private canvasComponent: CanvasComponent;
     private clientRect: ClientRect;
 
+
     constructor() {
         this.canvasComponent = CanvasComponent.getInstance();
         this.canvas = this.canvasComponent.canvas;
@@ -44,10 +45,7 @@ export default class CanvasEventHandlers {
     private mouseDownEventHandler = (e: MouseEvent) => {
         let rect = this.canvas.getBoundingClientRect();
 
-        let mousePos: MousePos =  {
-            x: e.clientX - rect.left,
-            y: e.clientY - rect.top
-        };
+        let mousePos: MousePos =  new MousePos(e.clientX - rect.left, e.clientY - rect.top);
         // let clickedSquare: Square | undefined = AlgoComponent.binarySearchOnMatrix(this.canvasComponent.squaresMatrix, mousePos);
         let clickedSquare: Square | undefined = AlgoComponent.findClickedSquare(this.canvasComponent.squaresMatrix, mousePos, this.canvasComponent.squareWidth);
 

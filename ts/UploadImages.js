@@ -1,3 +1,4 @@
+//TODO: Find a way to refactor this in typescript
 export default class UploadImages {
     constructor() {
         this.submitBtn = document.getElementById('images_submit_btn');

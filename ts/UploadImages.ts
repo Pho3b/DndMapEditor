@@ -1,3 +1,5 @@
+//TODO: Find a way to refactor this in typescript
+
 export default class UploadImages {
     private submitBtn: HTMLButtonElement = document.getElementById('images_submit_btn') as HTMLButtonElement;
 
