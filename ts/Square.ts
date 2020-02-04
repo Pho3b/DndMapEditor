@@ -74,4 +74,11 @@ export default class Square {
         if (this.level3Img.src.length !== this.urlLength)
             this.canvasComponent.ctx.drawImage(this.level3Img, this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
     }
+
+    public deleteImages() : void {
+        this.level1Img.src = this.url;
+        this.level2Img.src = this.url;
+        this.level3Img.src = this.url;
+        this.colorSquare();
+    }
 }

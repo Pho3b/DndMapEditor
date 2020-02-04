@@ -8,6 +8,8 @@ export default class CanvasEventHandlers {
     private readonly canvas: HTMLCanvasElement;
     private canvasComponent: CanvasComponent;
     private clientRect: ClientRect;
+    private static drawOrDelete: boolean = true;
+    private currentUrl: string = window.location.href;
 
 
     constructor() {
@@ -27,6 +29,7 @@ export default class CanvasEventHandlers {
 
     public initEventHandlers(canvas: HTMLCanvasElement) {
         this.canvas.addEventListener("mousedown", this.mouseDownEventHandler);
+        document.addEventListener("keyup", this.keyDownEventListener);
 
 
         // canvas.addEventListener("mousemove", this.dragEventHandler);
@@ -50,9 +53,33 @@ export default class CanvasEventHandlers {
         let clickedSquare: Square | undefined = AlgoComponent.findClickedSquare(this.canvasComponent.squaresMatrix, mousePos, this.canvasComponent.squareWidth);
 
         if (clickedSquare !== undefined) {
-            clickedSquare.setImage();
+            if (CanvasEventHandlers.drawOrDelete)
+                clickedSquare.setImage();
+            else
+                clickedSquare.deleteImages();
         } else {
             console.log("Undefined square, which one should i color ?");
         }
     };
+
+    private keyDownEventListener = (event: KeyboardEvent) => {
+        if (event.defaultPrevented)
+            return;
+
+        let key = event.key || event.keyCode;
+
+        if (key === 'Control' || key === 17) {
+            this.toggleDrawOrDelete();
+        }
+    };
+
+    private toggleDrawOrDelete() {
+        CanvasEventHandlers.drawOrDelete = !CanvasEventHandlers.drawOrDelete;
+
+        if (CanvasEventHandlers.drawOrDelete)
+            this.canvas.style.cursor = 'default';
+        else
+            this.canvas.style.cursor = "url('" + this.currentUrl + "img/rubber.png'), auto";
+    }
+
 }
