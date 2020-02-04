@@ -18,12 +18,18 @@ export default class ImagesGalleryComponent {
                     let img = document.createElement('img');
                     img.height = 100;
                     img.width = 100;
+                    img.title = files[i];
+                    img.setAttribute('data-toggle', 'tooltip');
                     img.src = '/img/' + folder + '/' + files[i];
                     img.classList.add('gallery_image');
                     fragment.appendChild(img);
                     img.addEventListener('click', ImagesGalleryComponent.imageClickEventHandler);
                 }
                 images_gallery.appendChild(fragment);
+                $(document).ready(function () {
+                    // @ts-ignore
+                    $('[data-toggle="tooltip"]').tooltip();
+                });
             }
         };
         xhrReq.open("GET", "/retrieve_files?folder=" + folder);
