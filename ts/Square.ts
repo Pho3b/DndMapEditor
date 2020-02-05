@@ -1,11 +1,10 @@
 import CanvasComponent from "./CanvasComponent.js";
 import ImagesLevelComponent, {ImagesLevel} from "./ImagesLevelComponent.js";
 import ImagesGalleryComponent from "./ImagesGalleryComponent.js";
+import Main from "./Main.js";
 
 export default class Square {
     private canvasComponent: CanvasComponent;
-    private url: string =  window.location.href;
-    private urlLength: number = this.url.length;
     private defaultColor: string = "#eff9f9";
     public xMin: number;
     public yMin: number;
@@ -25,9 +24,9 @@ export default class Square {
         this.level1Img = new Image();
         this.level2Img = new Image();
         this.level3Img = new Image();
-        this.level1Img.src = this.url;
-        this.level2Img.src = this.url;
-        this.level3Img.src = this.url;
+        this.level1Img.src = Main.url;
+        this.level2Img.src = Main.url;
+        this.level3Img.src = Main.url;
     }
 
     public colorSquare(color: string = this.defaultColor) {
@@ -38,47 +37,47 @@ export default class Square {
 
     public setImage() : any {
         if (ImagesLevelComponent.selectedLevel === ImagesLevel.level1) {
-            if (this.level1Img.src.length ===  this.urlLength) {
-                this.level1Img.src = ImagesGalleryComponent.selectedImage?.src ?? this.url;
+            if (this.level1Img.src.length ===  Main.urlLength) {
+                this.level1Img.src = ImagesGalleryComponent.selectedImage?.src ?? Main.url;
             } else {
-                this.level1Img.src = this.url;
+                this.level1Img.src = Main.url;
             }
         }
 
         if (ImagesLevelComponent.selectedLevel === ImagesLevel.level2) {
-            if (this.level2Img.src.length === this.urlLength) {
-                this.level2Img.src = ImagesGalleryComponent.selectedImage?.src ?? this.url;
+            if (this.level2Img.src.length === Main.urlLength) {
+                this.level2Img.src = ImagesGalleryComponent.selectedImage?.src ?? Main.url;
             } else {
-                this.level2Img.src = this.url;
+                this.level2Img.src = Main.url;
             }
         }
 
         if (ImagesLevelComponent.selectedLevel === ImagesLevel.level3) {
-            if (this.level3Img.src.length === this.urlLength) {
-                this.level3Img.src = ImagesGalleryComponent.selectedImage?.src ?? this.url;
+            if (this.level3Img.src.length === Main.urlLength) {
+                this.level3Img.src = ImagesGalleryComponent.selectedImage?.src ?? Main.url;
             } else {
-                this.level3Img.src = this.url;
+                this.level3Img.src = Main.url;
             }
         }
 
         this.drawImages();
     }
 
-    private drawImages() : void {
+    public drawImages() : void {
         this.colorSquare();
 
-        if (this.level1Img.src.length !== this.urlLength)
+        if (this.level1Img.src.length !== Main.urlLength)
             this.canvasComponent.ctx.drawImage(this.level1Img, this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
-        if (this.level2Img.src.length !== this.urlLength)
+        if (this.level2Img.src.length !== Main.urlLength)
             this.canvasComponent.ctx.drawImage(this.level2Img, this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
-        if (this.level3Img.src.length !== this.urlLength)
+        if (this.level3Img.src.length !== Main.urlLength)
             this.canvasComponent.ctx.drawImage(this.level3Img, this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
     }
 
     public deleteImages() : void {
-        this.level1Img.src = this.url;
-        this.level2Img.src = this.url;
-        this.level3Img.src = this.url;
+        this.level1Img.src = Main.url;
+        this.level2Img.src = Main.url;
+        this.level3Img.src = Main.url;
         this.colorSquare();
     }
 }

@@ -26,6 +26,9 @@ export default class CanvasEventHandlers {
             if (key === 'Control' || key === 17) {
                 this.toggleDrawOrDelete();
             }
+            if (key === ' ' || key === 32) {
+                this.canvasComponent.drawPreSavedGrid(this.canvasComponent.squaresMatrix);
+            }
         };
         this.canvasComponent = CanvasComponent.getInstance();
         this.canvas = this.canvasComponent.canvas;

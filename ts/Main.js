@@ -10,4 +10,6 @@ export default class Main {
         this.imagesLevelComponent = new ImagesLevelComponent();
     }
 }
+Main.url = window.location.href;
+Main.urlLength = Main.url.length;
 new Main();
