@@ -1,8 +1,8 @@
 import Square from "./Square.js";
 export default class CanvasComponent {
     constructor() {
-        this.cells = 10;
-        this.canvasWidth = 600;
+        this.cells = 100;
+        this.canvasWidth = 10000;
         this.canvas = this.initCanvas();
         this.ctx = this.initContext(this.canvas);
         this.squareWidth = this.canvas.width / this.cells;

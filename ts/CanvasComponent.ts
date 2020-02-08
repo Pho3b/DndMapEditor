@@ -7,8 +7,8 @@ export default class CanvasComponent {
     public squaresMatrix: Square[][];
     public squareWidth: number;
     public squareHeight: number;
-    private cells: number = 10;
-    private canvasWidth: number = 600;
+    private cells: number = 100;
+    private canvasWidth: number = 10000;
 
 
     constructor() {
