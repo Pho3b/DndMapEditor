@@ -3,10 +3,13 @@ export default class CanvasComponent {
     constructor() {
         this.cells = 100;
         this.canvasWidth = 10000;
+        this.signalCellWidth = Math.floor(this.canvasWidth * 0.02);
+        this.signalCellHeight = Math.floor(this.canvasWidth * 0.02);
         this.canvas = this.initCanvas();
         this.ctx = this.initContext(this.canvas);
         this.squareWidth = this.canvas.width / this.cells;
         this.squareHeight = this.canvas.width / this.cells;
+        this.createCellsSignals();
         this.squaresMatrix = this.createNewGrid();
     }
     static getInstance() {
@@ -31,18 +34,34 @@ export default class CanvasComponent {
         }
         return context;
     }
+    drawCellSignal(x, y, width, height) {
+        this.ctx.beginPath();
+        this.ctx.rect(x, y, width, height);
+        this.ctx.fillRect(x, y, width, height);
+        this.ctx.stroke();
+    }
     drawSquare(x, y, width) {
         this.ctx.beginPath();
         this.ctx.rect(x, y, width, width);
         this.ctx.stroke();
         return new Square(x, y, this);
     }
+    createCellsSignals() {
+        let editedCanvasWidth = this.canvas.width + 20;
+        for (let x = 0; x < editedCanvasWidth; x += this.squareWidth) {
+            this.drawCellSignal(x, 0, this.squareWidth, this.signalCellHeight);
+        }
+        for (let y = 0; y < editedCanvasWidth; y += this.signalCellHeight) {
+            this.drawCellSignal(0, y, this.signalCellWidth, this.squareHeight);
+        }
+    }
     createNewGrid() {
         let column;
         let res = [];
-        for (let x = 0; x < this.canvas.width; x += this.squareWidth) {
-            column = [this.drawSquare(x, 0, this.squareWidth)];
-            for (let y = this.squareHeight; y < this.canvas.height; y += this.squareHeight) {
+        let editedCanvasWidth = this.canvas.width + 20;
+        for (let x = this.signalCellWidth; x < editedCanvasWidth; x += this.squareWidth) {
+            column = [];
+            for (let y = 20; y < editedCanvasWidth; y += this.squareHeight) {
                 column.push(this.drawSquare(x, y, this.squareWidth));
             }
             res.push(column);
@@ -64,9 +83,9 @@ export default class CanvasComponent {
                 // @ts-ignore
                 currentSquare = this.drawSquare(savedMatrix[counter]["x"], savedMatrix[counter]["y"], this.squareWidth);
                 console.log(savedMatrix[counter][y]);
-                currentSquare.level1Img = savedMatrix[counter]["level1Img"];
-                currentSquare.level1Img = savedMatrix[counter]["level1Img"];
-                currentSquare.level1Img = savedMatrix[counter]["level1Img"];
+                // currentSquare.level1Img = savedMatrix[counter]["level1Img"];
+                // currentSquare.level1Img = savedMatrix[counter]["level1Img"];
+                // currentSquare.level1Img = savedMatrix[counter]["level1Img"];
                 currentSquare.drawImages();
                 //console.log(currentSquare);
                 this.squaresMatrix[x][y] = currentSquare;

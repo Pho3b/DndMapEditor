@@ -13,9 +13,12 @@
     <link rel="stylesheet" href="/css/my-style.css">
 </head>
 <body>
-<div class="container-fluid content" style="background-color: #eff9f9; min-height: 100%; overflow: scroll;">
+<div class="container-fluid content" style="background-color: #eff9f9;height: 85%;">
     <div class="row h-75">
-        <div class="col-md-2">
+        <div class="col-md-1">
+            <div class="row mt-4 pl-2">
+                <a class="upload_images" href="/upload_images"><i class="fas fa-cloud-upload-alt"></i> Upload Images </a>
+            </div>
             <div class="row mt-4 pl-2">
                 <div class="form-check">
                     <div class="radio">
@@ -35,9 +38,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-4 pl-2">
-                <a class="upload_images" href="/upload_images"><i class="fas fa-cloud-upload-alt"></i> Upload Images </a>
-            </div>
+            <hr>
             <div class="row mt-2 pl-2">
                 <div class="form-check">
                     <% for (var i = 0; i < folders.length; i++) { %>
@@ -50,22 +51,21 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-8 p-0">
-            <canvas id="canvas" style="border: 1px solid black; margin-top: 5px; border-radius: 3px;"></canvas>
+        <div class="col-md-11 p-0">
+            <div id="canvas_div">
+                <canvas id="canvas"></canvas>
+            </div>
         </div>
-        <div class="col-md-2"></div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-12">
-        <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
-            <div class="container text-center">
-                <div class=" mt-2 mb-1" id="images_gallery">
-                    <!--Images Gallery Here-->
-                </div>
+<div class="col-md-12" style=" height:10vh">
+    <footer class=" bg-dark text-white-50">
+        <div class="container text-center">
+            <div id="images_gallery">
+                <!--Images Gallery Here-->
             </div>
-        </footer>
-    </div>
+        </div>
+    </footer>
 </div>
 
 <!-- Bootstrap Script Dependencies -->
