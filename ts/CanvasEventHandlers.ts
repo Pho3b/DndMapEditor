@@ -29,7 +29,7 @@ export default class CanvasEventHandlers {
 
     public initEventHandlers(canvas: HTMLCanvasElement) {
         this.canvas.addEventListener("mousedown", this.mouseDownEventHandler);
-        document.addEventListener("keyup", this.keyDownEventListener);
+        document.addEventListener("keydown", this.keyDownEventListener);
 
 
         // canvas.addEventListener("mousemove", this.dragEventHandler);

@@ -1,4 +1,5 @@
 export default class Persister {
+    // TODO: Insert the saved JSON inside a file with an ajax call to node.js
     static saveMap(matrix) {
         let len = matrix.length;
         let savedMap = [];

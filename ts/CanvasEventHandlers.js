@@ -43,7 +43,7 @@ export default class CanvasEventHandlers {
     }
     initEventHandlers(canvas) {
         this.canvas.addEventListener("mousedown", this.mouseDownEventHandler);
-        document.addEventListener("keyup", this.keyDownEventListener);
+        document.addEventListener("keydown", this.keyDownEventListener);
         // canvas.addEventListener("mousemove", this.dragEventHandler);
         // canvas.addEventListener("mouseup", this.releaseEventHandler);
         // canvas.addEventListener("mouseout", this.cancelEventHandler);

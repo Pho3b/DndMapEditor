@@ -2,6 +2,7 @@ import Square from "./Square.js";
 
 export default class Persister {
 
+    // TODO: Insert the saved JSON inside a file with an ajax call to node.js
     public static saveMap(matrix: Square[][]) : void {
         let len: number = matrix.length;
         let savedMap: object[] = [];

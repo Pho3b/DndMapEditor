@@ -17,6 +17,11 @@ export default class Main {
         this.eventHandlers = CanvasEventHandlers.getInstance();
         this.imagesGalleryComponent = new ImagesGalleryComponent();
         this.imagesLevelComponent = new ImagesLevelComponent();
+
+        // Auto clicking the first folder
+        let first_folder: HTMLElement | null = document.getElementById('folder_0');
+        if (first_folder)
+            first_folder.click();
     }
 }
 
