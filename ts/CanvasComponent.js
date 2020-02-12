@@ -1,14 +1,17 @@
 import Square from "./Square.js";
 export default class CanvasComponent {
     constructor() {
-        this.cells = 100;
-        this.canvasWidth = 10000;
-        this.signalCellWidth = Math.floor(this.canvasWidth * 0.02);
-        this.signalCellHeight = Math.floor(this.canvasWidth * 0.02);
+        this.cells = 30;
+        this.canvasWidth = 1000;
+        this.signalCellWidth = Math.floor(this.canvasWidth * 0.01);
+        this.signalCellHeight = Math.floor(this.canvasWidth * 0.01);
+        this.editedCanvasWidth = this.canvasWidth + this.signalCellWidth;
         this.canvas = this.initCanvas();
+        console.log(this.canvas.width);
+        console.log(this.canvas.height);
         this.ctx = this.initContext(this.canvas);
-        this.squareWidth = this.canvas.width / this.cells;
-        this.squareHeight = this.canvas.width / this.cells;
+        this.squareWidth = (this.canvas.width - this.signalCellWidth) / this.cells;
+        this.squareHeight = (this.canvas.width - this.signalCellHeight) / this.cells;
         this.createCellsSignals();
         this.squaresMatrix = this.createNewGrid();
     }
@@ -20,8 +23,8 @@ export default class CanvasComponent {
     }
     initCanvas() {
         let canvas = document.getElementById('canvas');
-        canvas.width = this.canvasWidth;
-        canvas.height = this.canvasWidth;
+        canvas.width = this.editedCanvasWidth;
+        canvas.height = this.editedCanvasWidth;
         return canvas;
     }
     initContext(canvas) {
@@ -37,8 +40,12 @@ export default class CanvasComponent {
     drawCellSignal(x, y, width, height) {
         this.ctx.beginPath();
         this.ctx.rect(x, y, width, height);
+        this.ctx.fillStyle = "white";
         this.ctx.fillRect(x, y, width, height);
         this.ctx.stroke();
+        this.ctx.fillStyle = "black";
+        this.ctx.font = "10pt sans-serif";
+        this.ctx.fillText("" + x, x, y + 10);
     }
     drawSquare(x, y, width) {
         this.ctx.beginPath();
@@ -47,21 +54,20 @@ export default class CanvasComponent {
         return new Square(x, y, this);
     }
     createCellsSignals() {
-        let editedCanvasWidth = this.canvas.width + 20;
-        for (let x = 0; x < editedCanvasWidth; x += this.squareWidth) {
+        for (let x = this.signalCellWidth; x <= this.editedCanvasWidth; x += this.squareWidth) {
             this.drawCellSignal(x, 0, this.squareWidth, this.signalCellHeight);
         }
-        for (let y = 0; y < editedCanvasWidth; y += this.signalCellHeight) {
+        for (let y = this.signalCellHeight; y <= this.editedCanvasWidth; y += this.squareHeight) {
             this.drawCellSignal(0, y, this.signalCellWidth, this.squareHeight);
         }
     }
     createNewGrid() {
         let column;
         let res = [];
-        let editedCanvasWidth = this.canvas.width + 20;
-        for (let x = this.signalCellWidth; x < editedCanvasWidth; x += this.squareWidth) {
+        for (let x = this.signalCellWidth; x <= this.editedCanvasWidth; x += this.squareWidth) {
             column = [];
-            for (let y = 20; y < editedCanvasWidth; y += this.squareHeight) {
+            console.log(x);
+            for (let y = this.signalCellHeight; y <= this.editedCanvasWidth; y += this.squareHeight) {
                 column.push(this.drawSquare(x, y, this.squareWidth));
             }
             res.push(column);

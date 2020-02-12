@@ -1,9 +1,16 @@
 import Square from "./Square.js";
 import MousePos from "./MousePos.js";
+import CanvasComponent from "./CanvasComponent.js";
 
 export default class AlgoComponent {
     private static COL: number = 10;
     private static ROWS = 10;
+    private canvasComponens: CanvasComponent;
+
+
+    constructor() {
+        this.canvasComponens = CanvasComponent.getInstance();
+    }
 
     public static binarySearchOnMatrix(matrix: Square[][], key: MousePos) : Square | undefined {
         let start: number = 0;
