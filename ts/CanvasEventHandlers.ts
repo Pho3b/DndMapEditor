@@ -5,10 +5,10 @@ import Square from "./Square.js";
 
 export default class CanvasEventHandlers {
     private static instance: CanvasEventHandlers;
+    private static drawOrDelete: boolean = true;
     private readonly canvas: HTMLCanvasElement;
     private canvasComponent: CanvasComponent;
     private clientRect: ClientRect;
-    private static drawOrDelete: boolean = true;
     private currentUrl: string = window.location.href;
 
 
@@ -20,17 +20,16 @@ export default class CanvasEventHandlers {
         this.initEventHandlers(this.canvas);
     }
 
-    public static getInstance() : CanvasEventHandlers {
-         if (!this.instance) {
-             this.instance = new CanvasEventHandlers();
-         }
-         return this.instance;
+    public static getInstance(): CanvasEventHandlers {
+        if (!this.instance) {
+            this.instance = new CanvasEventHandlers();
+        }
+        return this.instance;
     }
 
     public initEventHandlers(canvas: HTMLCanvasElement) {
         this.canvas.addEventListener("mousedown", this.mouseDownEventHandler);
         document.addEventListener("keydown", this.keyDownEventListener);
-
 
         // canvas.addEventListener("mousemove", this.dragEventHandler);
         // canvas.addEventListener("mouseup", this.releaseEventHandler);
@@ -47,10 +46,8 @@ export default class CanvasEventHandlers {
 
     private mouseDownEventHandler = (e: MouseEvent) => {
         let rect = this.canvas.getBoundingClientRect();
-
-        let mousePos: MousePos =  new MousePos(e.clientX - rect.left, e.clientY - rect.top);
-        // let clickedSquare: Square | undefined = AlgoComponent.binarySearchOnMatrix(this.canvasComponent.squaresMatrix, mousePos);
-        let clickedSquare: Square | undefined = AlgoComponent.findClickedSquare(this.canvasComponent.squaresMatrix, mousePos, this.canvasComponent.squareWidth);
+        let mousePos: MousePos = new MousePos(e.clientX - rect.left, e.clientY - rect.top);
+        let clickedSquare: Square | undefined = AlgoComponent.findClickedSquare(this.canvasComponent.squaresMatrix, mousePos, this.canvasComponent.squareWidth, this.canvasComponent.signalCellWidth);
 
         if (clickedSquare !== undefined) {
             if (CanvasEventHandlers.drawOrDelete)
@@ -85,5 +82,4 @@ export default class CanvasEventHandlers {
         else
             this.canvas.style.cursor = "url('" + this.currentUrl + "img/rubber.png'), auto";
     }
-
 }

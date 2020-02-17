@@ -30,9 +30,9 @@ export default class AlgoComponent {
         }
         return undefined;
     }
-    static findClickedSquare(matrix, click, squareMeasure) {
-        let col = Math.floor(click.y / squareMeasure);
-        let row = Math.floor(click.x / squareMeasure);
+    static findClickedSquare(matrix, click, squareMeasure, signalSpace) {
+        let col = Math.floor((click.y - signalSpace) / squareMeasure);
+        let row = Math.floor((click.x - signalSpace) / squareMeasure);
         return matrix[row][col];
     }
     static createTestingMatrix() {

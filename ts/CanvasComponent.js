@@ -1,14 +1,16 @@
 import Square from "./Square.js";
 export default class CanvasComponent {
     constructor() {
-        this.cells = 30;
-        this.canvasWidth = 1000;
+        this.cells = 100;
+        this.canvasWidth = 4000;
         this.signalCellWidth = Math.floor(this.canvasWidth * 0.01);
         this.signalCellHeight = Math.floor(this.canvasWidth * 0.01);
         this.editedCanvasWidth = this.canvasWidth + this.signalCellWidth;
+        this.counterX = 1;
+        this.counterY = 1;
+        this.charPosY = this.signalCellHeight / 1.7;
+        this.charPosX = this.signalCellHeight / 4;
         this.canvas = this.initCanvas();
-        console.log(this.canvas.width);
-        console.log(this.canvas.height);
         this.ctx = this.initContext(this.canvas);
         this.squareWidth = (this.canvas.width - this.signalCellWidth) / this.cells;
         this.squareHeight = (this.canvas.width - this.signalCellHeight) / this.cells;
@@ -44,8 +46,15 @@ export default class CanvasComponent {
         this.ctx.fillRect(x, y, width, height);
         this.ctx.stroke();
         this.ctx.fillStyle = "black";
-        this.ctx.font = "10pt sans-serif";
-        this.ctx.fillText("" + x, x, y + 10);
+        this.ctx.font = "12pt sans-serif";
+        if (y === 0 && x !== 0) {
+            this.ctx.fillText(this.counterX.toString(), x + (this.charPosX / 4), this.charPosY);
+            this.counterX++;
+        }
+        else if (x === 0 && y !== 0) {
+            this.ctx.fillText(this.counterY.toString(), this.charPosX + 3, y + (this.charPosX + this.charPosX));
+            this.counterY++;
+        }
     }
     drawSquare(x, y, width) {
         this.ctx.beginPath();
@@ -66,13 +75,11 @@ export default class CanvasComponent {
         let res = [];
         for (let x = this.signalCellWidth; x <= this.editedCanvasWidth; x += this.squareWidth) {
             column = [];
-            console.log(x);
             for (let y = this.signalCellHeight; y <= this.editedCanvasWidth; y += this.squareHeight) {
                 column.push(this.drawSquare(x, y, this.squareWidth));
             }
             res.push(column);
         }
-        console.log(res);
         return res;
     }
     drawPreSavedGrid(savedMatrix) {

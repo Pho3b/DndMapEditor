@@ -42,9 +42,9 @@ export default class AlgoComponent {
         return undefined;
     }
 
-    public static findClickedSquare(matrix: Square[][], click: MousePos, squareMeasure: number) : Square {
-        let col = Math.floor(click.y / squareMeasure);
-        let row = Math.floor(click.x / squareMeasure);
+    public static findClickedSquare(matrix: Square[][], click: MousePos, squareMeasure: number, signalSpace: number) : Square {
+        let col = Math.floor((click.y - signalSpace) / squareMeasure);
+        let row = Math.floor((click.x - signalSpace) / squareMeasure);
 
         return matrix[row][col];
     }

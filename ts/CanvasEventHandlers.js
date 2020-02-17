@@ -7,8 +7,7 @@ export default class CanvasEventHandlers {
         this.mouseDownEventHandler = (e) => {
             let rect = this.canvas.getBoundingClientRect();
             let mousePos = new MousePos(e.clientX - rect.left, e.clientY - rect.top);
-            // let clickedSquare: Square | undefined = AlgoComponent.binarySearchOnMatrix(this.canvasComponent.squaresMatrix, mousePos);
-            let clickedSquare = AlgoComponent.findClickedSquare(this.canvasComponent.squaresMatrix, mousePos, this.canvasComponent.squareWidth);
+            let clickedSquare = AlgoComponent.findClickedSquare(this.canvasComponent.squaresMatrix, mousePos, this.canvasComponent.squareWidth, this.canvasComponent.signalCellWidth);
             if (clickedSquare !== undefined) {
                 if (CanvasEventHandlers.drawOrDelete)
                     clickedSquare.setImage();
