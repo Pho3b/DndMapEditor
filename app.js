@@ -5,6 +5,7 @@ const utilities = require('./js/modules/utilities');
 const fileUpload = require('express-fileupload');
 const post_images_uploader = require('./js/modules/post_images_uploader');
 const retrieve_files = require('./js/modules/retrieve_files');
+const persister = require('./js/modules/persister');
 const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
 const port = 3000;
@@ -41,6 +42,10 @@ app.get('/retrieve_files', function (req, res) {
 
 app.post('/images_uploader', function (req, res) {
     post_images_uploader.upload_images(req, res);
+});
+
+app.post('/save_map', function (req, res) {
+    persister.save_map(req, res);
 });
 
 app.use('/img', express.static(__dirname + '/images/'));

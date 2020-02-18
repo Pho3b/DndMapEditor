@@ -1,4 +1,5 @@
 import Square from "./Square.js";
+import Main from "./Main.js";
 
 export default class Persister {
 
@@ -12,17 +13,30 @@ export default class Persister {
             for (let y = 0; y < len; y++) {
                 //console.log(matrix[x][y]);
                 savedMap.push({
-                    "row": y,
-                    "column": x,
-                    "x": matrix[x][y].xMin,
-                    "y": matrix[x][y].yMin,
-                    "image1": matrix[x][y].level1Img.src,
-                    "image2": matrix[x][y].level2Img.src,
-                    "image3": matrix[x][y].level2Img.src,
+                    "1": matrix[x][y].level1Img.src.replace(Main.url, ''),
+                    "2": matrix[x][y].level2Img.src.replace(Main.url, ''),
+                    "3": matrix[x][y].level2Img.src.replace(Main.url, ''),
                 });
             }
         }
         res = JSON.stringify(savedMap);
+        Persister.saveMapRequest(res);
+    }
+
+    private static saveMapRequest(mapString: string): boolean {
+        let xhrReq = new XMLHttpRequest();
+
+        xhrReq.onreadystatechange = function () : any {
+            if (this.readyState === 4 && this.status === 200) {
+                console.log('chiamata fatta');
+            }
+        };
+
+        xhrReq.open("POST", "/save_map");
+        xhrReq.setRequestHeader("Content-type", "application/json");
+        xhrReq.send(mapString);
+
+        return true;
     }
 
     public static loadMap(matrix: Square[][]): void {

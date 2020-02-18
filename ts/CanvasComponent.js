@@ -1,8 +1,9 @@
 import Square from "./Square.js";
+import Persister from "./Persister.js";
 export default class CanvasComponent {
     constructor() {
         this.cells = 100;
-        this.canvasWidth = 4000;
+        this.canvasWidth = 4300;
         this.signalCellWidth = Math.floor(this.canvasWidth * 0.01);
         this.signalCellHeight = Math.floor(this.canvasWidth * 0.01);
         this.editedCanvasWidth = this.canvasWidth + this.signalCellWidth;
@@ -16,6 +17,7 @@ export default class CanvasComponent {
         this.squareHeight = (this.canvas.width - this.signalCellHeight) / this.cells;
         this.createCellsSignals();
         this.squaresMatrix = this.createNewGrid();
+        Persister.saveMap(this.squaresMatrix);
     }
     static getInstance() {
         if (!CanvasComponent.instance) {

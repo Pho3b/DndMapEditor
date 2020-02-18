@@ -18,7 +18,6 @@ module.exports = {
                 }
             } else {
                 current_img_name = uploaded_images['name'];
-                console.log(uploaded_images);
                 uploaded_images.mv(this.base_path + chosen_folder + '/' + current_img_name);
             }
             success_file_moved = true;
