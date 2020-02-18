@@ -15,20 +15,19 @@ export default class Persister {
                 });
             }
         }
-        res = JSON.stringify(savedMap);
-        Persister.saveMapRequest(res);
+        //res =;
+        Persister.saveMapRequest(savedMap);
     }
-    static saveMapRequest(mapString) {
+    static saveMapRequest(map) {
         let xhrReq = new XMLHttpRequest();
         xhrReq.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
                 console.log('chiamata fatta');
             }
         };
-        xhrReq.open("POST", "/save_map");
-        xhrReq.setRequestHeader("Content-type", "application/json");
-        xhrReq.send(mapString);
-        return true;
+        xhrReq.open("POST", "/save_map", true);
+        xhrReq.setRequestHeader("Content-type", "application/json;charset=utf-8");
+        xhrReq.send(JSON.stringify(map));
     }
     static loadMap(matrix) {
     }

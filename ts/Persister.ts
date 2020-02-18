@@ -19,11 +19,11 @@ export default class Persister {
                 });
             }
         }
-        res = JSON.stringify(savedMap);
-        Persister.saveMapRequest(res);
+        //res =;
+        Persister.saveMapRequest(savedMap);
     }
 
-    private static saveMapRequest(mapString: string): boolean {
+    private static saveMapRequest(map: object[]): void {
         let xhrReq = new XMLHttpRequest();
 
         xhrReq.onreadystatechange = function () : any {
@@ -32,11 +32,9 @@ export default class Persister {
             }
         };
 
-        xhrReq.open("POST", "/save_map");
-        xhrReq.setRequestHeader("Content-type", "application/json");
-        xhrReq.send(mapString);
-
-        return true;
+        xhrReq.open("POST", "/save_map", true);
+        xhrReq.setRequestHeader("Content-type", "application/json;charset=utf-8");
+        xhrReq.send(JSON.stringify(map));
     }
 
     public static loadMap(matrix: Square[][]): void {

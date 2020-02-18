@@ -14,9 +14,8 @@ const port = 3000;
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 app.use(
-    bodyParser.urlencoded({
-        extended: false
-    }),
+    bodyParser.json({ limit: '10mb' }),
+    bodyParser.urlencoded({ extended: false, limit: '10mb' }),
     fileUpload(),
     cookieParser('secret'),
     flash()
