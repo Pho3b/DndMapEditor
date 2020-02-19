@@ -21,7 +21,6 @@ app.use(
     flash()
 );
 
-
 app.listen(port, function () {
     console.log('App listening on port ' + port + '!');
 });
@@ -44,7 +43,11 @@ app.post('/images_uploader', function (req, res) {
 });
 
 app.post('/save_map', function (req, res) {
-    persister.save_map(req, res);
+    persister.saveMap(req, res);
+});
+
+app.get('/load_map', function (req, res) {
+    persister.loadMap(res);
 });
 
 app.use('/img', express.static(__dirname + '/images/'));

@@ -17,6 +17,7 @@ export default class CanvasComponent {
     private counterY: number = 1;
     private charPosY: number = this.signalCellHeight / 1.7;
     private charPosX: number = this.signalCellHeight / 4;
+    private persister: Persister = new Persister();
 
 
     constructor() {
@@ -26,7 +27,7 @@ export default class CanvasComponent {
         this.squareHeight = (this.canvas.width - this.signalCellHeight) / this.cells;
         this.createCellsSignals();
         this.squaresMatrix = this.createNewGrid();
-        Persister.saveMap(this.squaresMatrix);
+        this.persister.loadMap();
     }
 
     static getInstance(): CanvasComponent {
@@ -111,29 +112,23 @@ export default class CanvasComponent {
         return res;
     }
 
-    public drawPreSavedGrid(savedMatrix: any[][]): void {
-        let len: number = savedMatrix.length;
-        let currentSquare: Square;
-        let counter = 0;
-        let savedSquare;
-
-        if (len !== this.squaresMatrix.length) {
-            console.log('Error while loading the last saved map');
-            return;
-        }
+    public drawPreSavedGrid(savedMatrix: any[]): void {
+        let len: number = this.cells;
+        let counter: number = 0;
 
         for (let x = 0; x < len; x++) {
             for (let y = 0; y < len; y++) {
-                // @ts-ignore
-                currentSquare = this.drawSquare(savedMatrix[counter]["x"], savedMatrix[counter]["y"], this.squareWidth);
-                console.log(savedMatrix[counter][y]);
-                // currentSquare.level1Img = savedMatrix[counter]["level1Img"];
-                // currentSquare.level1Img = savedMatrix[counter]["level1Img"];
-                // currentSquare.level1Img = savedMatrix[counter]["level1Img"];
-                currentSquare.drawImages();
-                //console.log(currentSquare);
-                this.squaresMatrix[x][y] = currentSquare;
+                if (x == 0 && y < 10) {
+                    console.log(this.squaresMatrix[x][y]);
+                    console.log(x, y, len);
+                }
+
+                this.squaresMatrix[x][y].level1Img = savedMatrix[counter]['1'];
+                this.squaresMatrix[x][y].level2Img = savedMatrix[counter]['2'];
+                this.squaresMatrix[x][y].level3Img = savedMatrix[counter]['3'];
+                counter++
             }
+            counter ++;
         }
     }
 }
