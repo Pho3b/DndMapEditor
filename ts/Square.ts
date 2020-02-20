@@ -67,11 +67,28 @@ export default class Square {
         this.colorSquare();
 
         if (this.level1Img.src.length !== Main.urlLength)
-            this.canvasComponent.ctx.drawImage(this.level1Img, this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
+            this.level1Img.onload = this.drawSingleImage(1);
         if (this.level2Img.src.length !== Main.urlLength)
-            this.canvasComponent.ctx.drawImage(this.level2Img, this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
+            this.level2Img.onload = this.drawSingleImage(2);
         if (this.level3Img.src.length !== Main.urlLength)
-            this.canvasComponent.ctx.drawImage(this.level3Img, this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
+            this.level3Img.onload = this.drawSingleImage(3);
+    }
+
+    public drawSingleImage(level: number) : any {
+        switch(level) {
+            case 1:
+                this.canvasComponent.ctx.drawImage(this.level1Img, this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
+                break;
+            case 2:
+                this.canvasComponent.ctx.drawImage(this.level2Img, this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
+                break;
+            case 3:
+                this.canvasComponent.ctx.drawImage(this.level3Img, this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
+                break;
+            default:
+                console.log('drawSingleImg Def');
+                break;
+        }
     }
 
     public deleteImages() : void {
