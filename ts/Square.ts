@@ -60,35 +60,28 @@ export default class Square {
             }
         }
 
-        this.drawImages();
+        console.log(ImagesLevelComponent.selectedLevel);
+        this.loadImages();
     }
 
-    public drawImages() : void {
+    public loadImages() : void {
         this.colorSquare();
 
         if (this.level1Img.src.length !== Main.urlLength)
-            this.level1Img.onload = this.drawSingleImage(1);
+            this.level1Img.onload = () => this.drawImages();
         if (this.level2Img.src.length !== Main.urlLength)
-            this.level2Img.onload = this.drawSingleImage(2);
+            this.level2Img.onload = () => this.drawImages();
         if (this.level3Img.src.length !== Main.urlLength)
-            this.level3Img.onload = this.drawSingleImage(3);
+            this.level3Img.onload = () => this.drawImages();
     }
 
-    public drawSingleImage(level: number) : any {
-        switch(level) {
-            case 1:
-                this.canvasComponent.ctx.drawImage(this.level1Img, this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
-                break;
-            case 2:
-                this.canvasComponent.ctx.drawImage(this.level2Img, this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
-                break;
-            case 3:
-                this.canvasComponent.ctx.drawImage(this.level3Img, this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
-                break;
-            default:
-                console.log('drawSingleImg Def');
-                break;
-        }
+    public drawImages() : any {
+        if (this.level1Img.src.length !== Main.urlLength)
+            this.canvasComponent.ctx.drawImage(this.level1Img, this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
+        if (this.level2Img.src.length !== Main.urlLength)
+            this.canvasComponent.ctx.drawImage(this.level2Img, this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
+        if (this.level3Img.src.length !== Main.urlLength)
+            this.canvasComponent.ctx.drawImage(this.level3Img, this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
     }
 
     public deleteImages() : void {

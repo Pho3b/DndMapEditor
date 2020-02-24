@@ -127,21 +127,26 @@ export default class CanvasComponent {
                 //     console.log(x, y, len);
                 // }
 
-                this.squaresMatrix[x][y].level1Img = new Image();
                 this.squaresMatrix[x][y].level1Img.src = Main.url + savedMatrix[counter]['1'];
-                this.squaresMatrix[x][y].level1Img.onload = this.squaresMatrix[x][y].drawSingleImage(1);
-
-                this.squaresMatrix[x][y].level2Img = new Image();
                 this.squaresMatrix[x][y].level2Img.src = Main.url + savedMatrix[counter]['2'];
-                this.squaresMatrix[x][y].level2Img.onload = this.squaresMatrix[x][y].drawSingleImage(2);
-
-                this.squaresMatrix[x][y].level3Img = new Image();
                 this.squaresMatrix[x][y].level3Img.src = Main.url + savedMatrix[counter]['3'];
-                this.squaresMatrix[x][y].level3Img.onload = this.squaresMatrix[x][y].drawSingleImage(3);
+
+                this.squaresMatrix[x][y].drawImages();
 
                 counter++
             }
             counter ++;
+        }
+        this.showCanvasHideLoadingImg();
+    }
+
+    private showCanvasHideLoadingImg() {
+        let loadingImg = document.getElementById('loading_img');
+        this.canvas.style.display = 'block';
+
+        if (loadingImg) {
+            loadingImg.style.display = 'none';
+            this.canvas.style.display = 'block';
         }
     }
 }
