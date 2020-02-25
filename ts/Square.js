@@ -47,11 +47,9 @@ export default class Square {
                 this.level3Img.src = Main.url;
             }
         }
-        console.log(ImagesLevelComponent.selectedLevel);
-        this.loadImages();
+        this.drawImages();
     }
     loadImages() {
-        this.colorSquare();
         if (this.level1Img.src.length !== Main.urlLength)
             this.level1Img.onload = () => this.drawImages();
         if (this.level2Img.src.length !== Main.urlLength)
@@ -60,6 +58,7 @@ export default class Square {
             this.level3Img.onload = () => this.drawImages();
     }
     drawImages() {
+        this.colorSquare();
         if (this.level1Img.src.length !== Main.urlLength)
             this.canvasComponent.ctx.drawImage(this.level1Img, this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
         if (this.level2Img.src.length !== Main.urlLength)

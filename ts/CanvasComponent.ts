@@ -10,7 +10,7 @@ export default class CanvasComponent {
     public squareWidth: number;
     public squareHeight: number;
     private cells: number = 100;
-    private canvasWidth: number = 4300;
+    private canvasWidth: number = 4500;
     public signalCellWidth: number = Math.floor(this.canvasWidth * 0.01);
     public signalCellHeight: number = Math.floor(this.canvasWidth * 0.01);
     public editedCanvasWidth: number = this.canvasWidth + this.signalCellWidth;
@@ -122,17 +122,11 @@ export default class CanvasComponent {
 
         for (let x = 0; x < len; x++) {
             for (let y = 0; y < len; y++) {
-                // if (x == 0 && y < 10) {
-                //     console.log(this.squaresMatrix[x][y]);
-                //     console.log(x, y, len);
-                // }
-
                 this.squaresMatrix[x][y].level1Img.src = Main.url + savedMatrix[counter]['1'];
                 this.squaresMatrix[x][y].level2Img.src = Main.url + savedMatrix[counter]['2'];
                 this.squaresMatrix[x][y].level3Img.src = Main.url + savedMatrix[counter]['3'];
 
                 this.squaresMatrix[x][y].drawImages();
-
                 counter++
             }
             counter ++;

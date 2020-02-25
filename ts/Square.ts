@@ -60,13 +60,10 @@ export default class Square {
             }
         }
 
-        console.log(ImagesLevelComponent.selectedLevel);
-        this.loadImages();
+        this.drawImages();
     }
 
     public loadImages() : void {
-        this.colorSquare();
-
         if (this.level1Img.src.length !== Main.urlLength)
             this.level1Img.onload = () => this.drawImages();
         if (this.level2Img.src.length !== Main.urlLength)
@@ -76,6 +73,8 @@ export default class Square {
     }
 
     public drawImages() : any {
+        this.colorSquare();
+
         if (this.level1Img.src.length !== Main.urlLength)
             this.canvasComponent.ctx.drawImage(this.level1Img, this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
         if (this.level2Img.src.length !== Main.urlLength)

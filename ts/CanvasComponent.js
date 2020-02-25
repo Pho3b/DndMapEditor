@@ -4,7 +4,7 @@ import Main from "./Main.js";
 export default class CanvasComponent {
     constructor() {
         this.cells = 100;
-        this.canvasWidth = 4300;
+        this.canvasWidth = 4500;
         this.signalCellWidth = Math.floor(this.canvasWidth * 0.01);
         this.signalCellHeight = Math.floor(this.canvasWidth * 0.01);
         this.editedCanvasWidth = this.canvasWidth + this.signalCellWidth;
@@ -94,10 +94,6 @@ export default class CanvasComponent {
         let counter = 0;
         for (let x = 0; x < len; x++) {
             for (let y = 0; y < len; y++) {
-                // if (x == 0 && y < 10) {
-                //     console.log(this.squaresMatrix[x][y]);
-                //     console.log(x, y, len);
-                // }
                 this.squaresMatrix[x][y].level1Img.src = Main.url + savedMatrix[counter]['1'];
                 this.squaresMatrix[x][y].level2Img.src = Main.url + savedMatrix[counter]['2'];
                 this.squaresMatrix[x][y].level3Img.src = Main.url + savedMatrix[counter]['3'];
