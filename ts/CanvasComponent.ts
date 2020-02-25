@@ -10,7 +10,7 @@ export default class CanvasComponent {
     public squareWidth: number;
     public squareHeight: number;
     private cells: number = 100;
-    private canvasWidth: number = 4500;
+    private canvasWidth: number = 3900;
     public signalCellWidth: number = Math.floor(this.canvasWidth * 0.01);
     public signalCellHeight: number = Math.floor(this.canvasWidth * 0.01);
     public editedCanvasWidth: number = this.canvasWidth + this.signalCellWidth;
@@ -132,6 +132,10 @@ export default class CanvasComponent {
             counter ++;
         }
         this.showCanvasHideLoadingImg();
+
+        // Centering the canvas
+        let canvas_div: HTMLElement | null = document.getElementById('canvas_div') as HTMLElement;
+        canvas_div.scrollBy(this.canvasWidth / 3, this.canvasWidth / 3);
     }
 
     private showCanvasHideLoadingImg() {

@@ -4,7 +4,7 @@ import Main from "./Main.js";
 export default class CanvasComponent {
     constructor() {
         this.cells = 100;
-        this.canvasWidth = 4500;
+        this.canvasWidth = 3900;
         this.signalCellWidth = Math.floor(this.canvasWidth * 0.01);
         this.signalCellHeight = Math.floor(this.canvasWidth * 0.01);
         this.editedCanvasWidth = this.canvasWidth + this.signalCellWidth;
@@ -103,6 +103,9 @@ export default class CanvasComponent {
             counter++;
         }
         this.showCanvasHideLoadingImg();
+        // Centering the canvas
+        let canvas_div = document.getElementById('canvas_div');
+        canvas_div.scrollBy(this.canvasWidth / 3, this.canvasWidth / 3);
     }
     showCanvasHideLoadingImg() {
         let loadingImg = document.getElementById('loading_img');
