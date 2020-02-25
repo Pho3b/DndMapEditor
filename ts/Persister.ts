@@ -26,7 +26,7 @@ export default class Persister {
 
         xhrReq.onreadystatechange = function () : any {
             if (this.readyState === 4 && this.status === 200) {
-                console.log('chiamata fatta');
+                alert('Map Saved !');
             }
         };
 

@@ -52,7 +52,7 @@ export default class ImagesGalleryComponent {
             for (let img of galleryImages) {
                 img.style.borderColor = "#ced4da";
             }
-            ImagesGalleryComponent.selectedImage.style.borderColor = "red";
+            ImagesGalleryComponent.selectedImage.style.borderColor = "#da0800";
         }
         else {
             console.log('selectedImage is undefined');

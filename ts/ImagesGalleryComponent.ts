@@ -69,7 +69,7 @@ export default class ImagesGalleryComponent {
                 img.style.borderColor = "#ced4da";
             }
 
-            ImagesGalleryComponent.selectedImage.style.borderColor = "red";
+            ImagesGalleryComponent.selectedImage.style.borderColor = "#da0800";
         } else {
             console.log('selectedImage is undefined');
         }

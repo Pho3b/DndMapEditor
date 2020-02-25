@@ -19,7 +19,7 @@ export default class Persister {
         let xhrReq = new XMLHttpRequest();
         xhrReq.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
-                console.log('chiamata fatta');
+                alert('Map Saved !');
             }
         };
         xhrReq.open("POST", "/save_map", true);

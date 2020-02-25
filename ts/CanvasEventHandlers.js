@@ -1,6 +1,7 @@
 import CanvasComponent from "./CanvasComponent.js";
 import MousePos from "./MousePos.js";
 import AlgoComponent from "./AlgoComponent.js";
+import Persister from "./Persister.js";
 export default class CanvasEventHandlers {
     constructor() {
         this.currentUrl = window.location.href;
@@ -43,6 +44,8 @@ export default class CanvasEventHandlers {
     initEventHandlers(canvas) {
         this.canvas.addEventListener("mousedown", this.mouseDownEventHandler);
         document.addEventListener("keydown", this.keyDownEventListener);
+        let saveMapBtn = document.getElementById('save_map_btn');
+        saveMapBtn.addEventListener('click', () => Persister.saveMap(this.canvasComponent.squaresMatrix));
         // canvas.addEventListener("mousemove", this.dragEventHandler);
         // canvas.addEventListener("mouseup", this.releaseEventHandler);
         // canvas.addEventListener("mouseout", this.cancelEventHandler);
