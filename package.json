@@ -2,7 +2,7 @@
   "name": "dndmapeditor",
   "version": "1.0.0",
   "description": "A Dungeons and Dragons map editr",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "test"
   },
