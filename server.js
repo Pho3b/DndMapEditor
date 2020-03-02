@@ -21,7 +21,7 @@ server.use(
     flash()
 );
 
-server.listen(port, function () {
+server.listen(process.env.PORT || port, function () {
     console.log('App listening on port ' + port + '!');
 });
 
