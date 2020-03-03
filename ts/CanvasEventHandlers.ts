@@ -33,18 +33,6 @@ export default class CanvasEventHandlers {
         document.addEventListener("keydown", this.keyDownEventListener);
         let saveMapBtn : HTMLButtonElement = document.getElementById('save_map_btn') as HTMLButtonElement;
         saveMapBtn.addEventListener('click', () => Persister.saveMap(this.canvasComponent.squaresMatrix));
-
-        // canvas.addEventListener("mousemove", this.dragEventHandler);
-        // canvas.addEventListener("mouseup", this.releaseEventHandler);
-        // canvas.addEventListener("mouseout", this.cancelEventHandler);
-        //
-        // canvas.addEventListener("touchstart", this.pressEventHandler);
-        // canvas.addEventListener("touchmove", this.dragEventHandler);
-        // canvas.addEventListener("touchend", this.releaseEventHandler);
-        // canvas.addEventListener("touchcancel", this.cancelEventHandler);
-        //
-        // document.getElementById('clear')
-        //     .addEventListener("click", this.clearEventHandler);
     };
 
     private mouseDownEventHandler = (e: MouseEvent) => {
@@ -70,11 +58,12 @@ export default class CanvasEventHandlers {
 
         if (key === 'Control' || key === 17) {
             this.toggleDrawOrDelete();
+            console.log(this.canvasComponent.squaresMatrix[0][0])
         }
 
-        if (key === ' ' || key === 32) {
-            this.canvasComponent.drawPreSavedGrid(this.canvasComponent.squaresMatrix);
-        }
+        // if (key === ' ' || key === 32) {
+        //     this.canvasComponent.drawPreSavedGrid(this.canvasComponent.squaresMatrix);
+        // }
     };
 
     private toggleDrawOrDelete() {

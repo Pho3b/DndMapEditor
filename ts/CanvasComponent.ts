@@ -122,18 +122,11 @@ export default class CanvasComponent {
 
         for (let x = 0; x < len; x++) {
             for (let y = 0; y < len; y++) {
-                if (savedMatrix[counter]['1'] !== '') {
-                    this.squaresMatrix[x][y].level1Img.src = Main.url + savedMatrix[counter]['1'];
-                    console.log(savedMatrix[counter]['1']);
-                    console.log()
-                }
+                this.squaresMatrix[x][y].levelImages[0].src = Main.url + savedMatrix[counter]['1'];
+                this.squaresMatrix[x][y].levelImages[1].src = Main.url + savedMatrix[counter]['2'];
+                this.squaresMatrix[x][y].levelImages[2].src = Main.url + savedMatrix[counter]['3'];
 
-                if (savedMatrix[counter]['2'] !== '')
-                    this.squaresMatrix[x][y].level2Img.src = Main.url + savedMatrix[counter]['2'];
-                if (savedMatrix[counter]['3'] !== '')
-                    this.squaresMatrix[x][y].level3Img.src = Main.url + savedMatrix[counter]['3'];
-
-                this.squaresMatrix[x][y].drawImages();
+                this.squaresMatrix[x][y].loadImages();
                 counter++
             }
             counter ++;

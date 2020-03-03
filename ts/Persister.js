@@ -7,9 +7,9 @@ export default class Persister {
         for (let x = 0; x < len; x++) {
             for (let y = 0; y < len; y++) {
                 savedMap.push({
-                    "1": matrix[x][y].level1Img.src.replace(Main.url, ''),
-                    "2": matrix[x][y].level2Img.src.replace(Main.url, ''),
-                    "3": matrix[x][y].level2Img.src.replace(Main.url, ''),
+                    "1": matrix[x][y].levelImages[0].src.replace(Main.url, ''),
+                    "2": matrix[x][y].levelImages[1].src.replace(Main.url, ''),
+                    "3": matrix[x][y].levelImages[2].src.replace(Main.url, ''),
                 });
             }
         }
