@@ -8,7 +8,7 @@ const retrieve_files = require('./js/modules/retrieve_files');
 const persister = require('./js/modules/persister');
 const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
-const port = 3000;
+const port = 5400;
 
 
 server.set('view engine', 'ejs');

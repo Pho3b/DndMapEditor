@@ -13,6 +13,10 @@ export default class CanvasComponent {
         this.charPosY = this.signalCellHeight / 1.7;
         this.charPosX = this.signalCellHeight / 4;
         this.persister = new Persister();
+        this.scrollCanvasToCenter = () => {
+            let canvas_div = document.getElementById('canvas_div');
+            canvas_div.scrollBy(this.canvasWidth / 3, this.canvasWidth / 3);
+        };
         this.canvas = this.initCanvas();
         this.ctx = this.initContext(this.canvas);
         this.squareWidth = (this.canvas.width - this.signalCellWidth) / this.cells;
@@ -94,18 +98,22 @@ export default class CanvasComponent {
         let counter = 0;
         for (let x = 0; x < len; x++) {
             for (let y = 0; y < len; y++) {
-                this.squaresMatrix[x][y].level1Img.src = Main.url + savedMatrix[counter]['1'];
-                this.squaresMatrix[x][y].level2Img.src = Main.url + savedMatrix[counter]['2'];
-                this.squaresMatrix[x][y].level3Img.src = Main.url + savedMatrix[counter]['3'];
+                if (savedMatrix[counter]['1'] !== '') {
+                    this.squaresMatrix[x][y].level1Img.src = Main.url + savedMatrix[counter]['1'];
+                    console.log(savedMatrix[counter]['1']);
+                    console.log();
+                }
+                if (savedMatrix[counter]['2'] !== '')
+                    this.squaresMatrix[x][y].level2Img.src = Main.url + savedMatrix[counter]['2'];
+                if (savedMatrix[counter]['3'] !== '')
+                    this.squaresMatrix[x][y].level3Img.src = Main.url + savedMatrix[counter]['3'];
                 this.squaresMatrix[x][y].drawImages();
                 counter++;
             }
             counter++;
         }
         this.showCanvasHideLoadingImg();
-        // Centering the canvas
-        let canvas_div = document.getElementById('canvas_div');
-        canvas_div.scrollBy(this.canvasWidth / 3, this.canvasWidth / 3);
+        // this.scrollCanvasToCenter();
     }
     showCanvasHideLoadingImg() {
         let loadingImg = document.getElementById('loading_img');
