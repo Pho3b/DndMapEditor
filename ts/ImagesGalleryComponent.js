@@ -16,8 +16,8 @@ export default class ImagesGalleryComponent {
                 images_gallery.innerHTML = '';
                 for (let i = 0; i < files.length; i++) {
                     let img = document.createElement('img');
-                    img.height = 100;
-                    img.width = 100;
+                    img.height = 80;
+                    img.width = 80;
                     img.title = files[i];
                     img.setAttribute('data-toggle', 'tooltip');
                     img.src = '/img/' + folder + '/' + files[i];

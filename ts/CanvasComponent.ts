@@ -131,11 +131,11 @@ export default class CanvasComponent {
             }
             counter ++;
         }
-        this.showCanvasHideLoadingImg();
+        this.showLoadedApp();
         // this.scrollCanvasToCenter();
     }
 
-    private showCanvasHideLoadingImg(): void {
+    private showLoadedApp(): void {
         let loadingImg = document.getElementById('loading_img');
         this.canvas.style.display = 'block';
 

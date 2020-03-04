@@ -106,10 +106,10 @@ export default class CanvasComponent {
             }
             counter++;
         }
-        this.showCanvasHideLoadingImg();
+        this.showLoadedApp();
         // this.scrollCanvasToCenter();
     }
-    showCanvasHideLoadingImg() {
+    showLoadedApp() {
         let loadingImg = document.getElementById('loading_img');
         this.canvas.style.display = 'block';
         if (loadingImg) {

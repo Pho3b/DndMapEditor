@@ -19,7 +19,7 @@ export default class Square {
         this.canvasComponent.ctx.fillRect(this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
         this.canvasComponent.ctx.strokeRect(this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
     }
-    setImage() {
+    setImage(load = false) {
         if (ImagesLevelComponent.selectedLevel === ImagesLevel.level1) {
             if (this.levelImages[0].src.length === Main.urlLength) {
                 // @ts-ignore
@@ -49,24 +49,24 @@ export default class Square {
                 this.levelImages[2].src = Main.url;
             }
         }
-        this.loadImages();
+        if (!load)
+            this.drawImages();
+        else
+            this.loadImages();
     }
     loadImages() {
         let counter = 0;
         let len = this.levelImages.length;
-        this.colorSquare();
-        console.log('load');
         for (let i = 0; i < len; i++) {
             this.levelImages[i].onload = () => {
-                console.log(counter + ' conta');
+                if (counter === len)
+                    this.drawImages();
             };
             counter++;
-            if (counter === len)
-                this.drawImages();
         }
     }
     drawImages() {
-        console.log('draw');
+        this.colorSquare();
         if (this.levelImages[0].src.length !== Main.urlLength) {
             this.canvasComponent.ctx.drawImage(this.levelImages[0], this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
             console.log(1);
