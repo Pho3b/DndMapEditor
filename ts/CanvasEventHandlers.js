@@ -27,9 +27,6 @@ export default class CanvasEventHandlers {
                 this.toggleDrawOrDelete();
                 console.log(this.canvasComponent.squaresMatrix[0][0]);
             }
-            // if (key === ' ' || key === 32) {
-            //     this.canvasComponent.drawPreSavedGrid(this.canvasComponent.squaresMatrix);
-            // }
         };
         this.canvasComponent = CanvasComponent.getInstance();
         this.canvas = this.canvasComponent.canvas;

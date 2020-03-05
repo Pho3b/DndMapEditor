@@ -12,10 +12,10 @@ export default class AlgoComponent {
         this.canvasComponens = CanvasComponent.getInstance();
     }
 
-    public static binarySearchOnMatrix(matrix: Square[][], key: MousePos) : Square | undefined {
+    public static binarySearchOnMatrix(matrix: Square[][], key: MousePos): Square | undefined {
         let start: number = 0;
-        let mid, row, col : number;
-        let currentSquare : Square;
+        let mid, row, col: number;
+        let currentSquare: Square;
         let end: number = AlgoComponent.ROWS * AlgoComponent.COL - 1;
 
         while (start <= end) {
@@ -24,10 +24,10 @@ export default class AlgoComponent {
             console.log("MID : " + mid);
             col = Math.round(mid / AlgoComponent.COL);
             row = Math.round(mid % AlgoComponent.COL);
-            console.log("ROW : " + (col + 1) + " - COL : " + (row + 1) );
+            console.log("ROW : " + (col + 1) + " - COL : " + (row + 1));
             currentSquare = matrix[row][col];
 
-            if (key.x >= currentSquare.xMin && key.x <= currentSquare.xMax && key.y >= currentSquare.yMin  &&  key.y <= currentSquare.yMax) {
+            if (key.x >= currentSquare.xMin && key.x <= currentSquare.xMax && key.y >= currentSquare.yMin && key.y <= currentSquare.yMax) {
                 console.log("! ROW : " + (col + 1) + " - COL : " + (row + 1) + " !");
                 console.log(currentSquare);
                 return currentSquare;
@@ -42,23 +42,23 @@ export default class AlgoComponent {
         return undefined;
     }
 
-    public static findClickedSquare(matrix: Square[][], click: MousePos, squareMeasure: number, signalSpace: number) : Square {
+    public static findClickedSquare(matrix: Square[][], click: MousePos, squareMeasure: number, signalSpace: number): Square {
         let col = Math.floor((click.y - signalSpace) / squareMeasure);
         let row = Math.floor((click.x - signalSpace) / squareMeasure);
 
         return matrix[row][col];
     }
 
-    public static createTestingMatrix() : number[][] {
+    public static createTestingMatrix(): number[][] {
         let limit: number = 10;
         let jIncrement: number = 0;
         let res: number[][] = [];
 
-        for(let i: number = 0; i < 10; i++) {
+        for (let i: number = 0; i < 10; i++) {
             res[i] = [];
-            for(let j: number = limit - 10; j < limit; j++) {
+            for (let j: number = limit - 10; j < limit; j++) {
                 res[i][jIncrement] = j;
-                jIncrement ++;
+                jIncrement++;
             }
             jIncrement = 0;
             limit += 10;
