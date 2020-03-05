@@ -1,4 +1,3 @@
-
 export default class ImagesGalleryComponent {
     private readonly radio_buttons: HTMLCollectionOf<Element>;
     public static selectedImage: HTMLImageElement | undefined = undefined;
@@ -9,11 +8,11 @@ export default class ImagesGalleryComponent {
         this.initEventHandlers();
     }
 
-    private populateShowGallery(event: MouseEvent) : any {
+    private populateShowGallery(event: MouseEvent): any {
         let folder = (event.target as HTMLInputElement).value;
         let xhrReq = new XMLHttpRequest();
 
-        xhrReq.onreadystatechange = function () : any {
+        xhrReq.onreadystatechange = function (): any {
             if (this.readyState === 4 && this.status === 200) {
                 let files = JSON.parse(xhrReq.responseText);
                 let fragment = new DocumentFragment();
@@ -37,7 +36,7 @@ export default class ImagesGalleryComponent {
                 }
                 images_gallery.appendChild(fragment);
 
-                $(document).ready(function(){
+                $(document).ready(function () {
                     // @ts-ignore
                     $('[data-toggle="tooltip"]').tooltip();
                 });
@@ -60,7 +59,7 @@ export default class ImagesGalleryComponent {
         }
     }
 
-    private static colorFocusedImageBorder() : void {
+    private static colorFocusedImageBorder(): void {
         if (ImagesGalleryComponent.selectedImage !== undefined) {
             let galleryImages: HTMLCollectionOf<HTMLImageElement> = document.getElementsByClassName('gallery_image') as HTMLCollectionOf<HTMLImageElement>;
 

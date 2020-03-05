@@ -129,7 +129,7 @@ export default class CanvasComponent {
                 this.squaresMatrix[x][y].loadImages();
                 counter++
             }
-            counter ++;
+            counter++;
         }
         this.showLoadedApp();
         // this.scrollCanvasToCenter();

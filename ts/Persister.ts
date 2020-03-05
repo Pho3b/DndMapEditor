@@ -24,7 +24,7 @@ export default class Persister {
     private static saveMapRequest(map: object[]): void {
         let xhrReq = new XMLHttpRequest();
 
-        xhrReq.onreadystatechange = function () : any {
+        xhrReq.onreadystatechange = function (): any {
             if (this.readyState === 4 && this.status === 200) {
                 alert('Map Saved !');
             }
@@ -38,7 +38,7 @@ export default class Persister {
     public loadMap(): void {
         let xhrReq = new XMLHttpRequest();
 
-        xhrReq.onreadystatechange = function () : any {
+        xhrReq.onreadystatechange = function (): any {
             if (this.readyState === 4 && this.status === 200) {
                 console.log("map loaded");
                 CanvasComponent.getInstance().drawPreSavedGrid(JSON.parse(xhrReq.response));

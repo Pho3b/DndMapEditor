@@ -30,9 +30,9 @@ export default class Square {
         this.canvasComponent.ctx.strokeRect(this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
     }
 
-    public setImage(load: boolean = false) : any {
+    public setImage(load: boolean = false): any {
         if (ImagesLevelComponent.selectedLevel === ImagesLevel.level1) {
-            if (this.levelImages[0].src.length ===  Main.urlLength) {
+            if (this.levelImages[0].src.length === Main.urlLength) {
                 // @ts-ignore
                 this.levelImages[0].src = ImagesGalleryComponent.selectedImage.src;
             } else {
@@ -66,20 +66,20 @@ export default class Square {
             this.loadImages();
     }
 
-    public loadImages() : any {
+    public loadImages(): any {
         let counter = 0;
         let len = this.levelImages.length;
 
         for (let i = 0; i < len; i++) {
             this.levelImages[i].onload = () => {
-                if(counter === len)
+                if (counter === len)
                     this.drawImages();
             };
             counter++;
         }
     }
 
-    private drawImages() : any {
+    private drawImages(): any {
         this.colorSquare();
 
         if (this.levelImages[0].src.length !== Main.urlLength) {
@@ -101,14 +101,11 @@ export default class Square {
         }
     }
 
-    public deleteImages() : void {
+    public deleteImages(): void {
         this.levelImages[0].src = Main.url;
         this.levelImages[1].src = Main.url;
         this.levelImages[2].src = Main.url;
 
         this.colorSquare();
     }
-
-    // TODO: Sentitela
-    // https://www.youtube.com/watch?v=Py9paavgZ-0
 }

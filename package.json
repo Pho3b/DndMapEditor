@@ -1,7 +1,7 @@
 {
   "name": "dndmapeditor",
   "version": "1.0.0",
-  "description": "A Dungeons and Dragons map editr",
+  "description": "A Dungeons and Dragons map editor",
   "main": "server.js",
   "scripts": {
     "test": "test"

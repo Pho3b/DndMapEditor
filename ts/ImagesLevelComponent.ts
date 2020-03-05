@@ -1,5 +1,5 @@
 export enum ImagesLevel {
-    level1 = 1 ,
+    level1 = 1,
     level2,
     level3
 }
@@ -16,7 +16,7 @@ export default class ImagesLevelComponent {
         }
     }
 
-    private clickEventHandler = (event: MouseEvent) : void => {
+    private clickEventHandler = (event: MouseEvent): void => {
         // @ts-ignore
         ImagesLevelComponent.selectedLevel = parseInt((event.target as HTMLInputElement).value);
     };

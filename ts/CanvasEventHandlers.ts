@@ -31,7 +31,7 @@ export default class CanvasEventHandlers {
     public initEventHandlers(canvas: HTMLCanvasElement) {
         this.canvas.addEventListener("mousedown", this.mouseDownEventHandler);
         document.addEventListener("keydown", this.keyDownEventListener);
-        let saveMapBtn : HTMLButtonElement = document.getElementById('save_map_btn') as HTMLButtonElement;
+        let saveMapBtn: HTMLButtonElement = document.getElementById('save_map_btn') as HTMLButtonElement;
         saveMapBtn.addEventListener('click', () => Persister.saveMap(this.canvasComponent.squaresMatrix));
     };
 
@@ -60,10 +60,6 @@ export default class CanvasEventHandlers {
             this.toggleDrawOrDelete();
             console.log(this.canvasComponent.squaresMatrix[0][0])
         }
-
-        // if (key === ' ' || key === 32) {
-        //     this.canvasComponent.drawPreSavedGrid(this.canvasComponent.squaresMatrix);
-        // }
     };
 
     private toggleDrawOrDelete() {

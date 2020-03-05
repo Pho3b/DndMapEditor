@@ -16,8 +16,8 @@ module.exports = {
     },
 
     loadMap: function (res) {
-        fs.readFile(this.saveFilePath, "utf8", function(err, data){
-            if(err) throw err;
+        fs.readFile(this.saveFilePath, "utf8", function (err, data) {
+            if (err) throw err;
 
             return res.send(JSON.parse(data));
         });

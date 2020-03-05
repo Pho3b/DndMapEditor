@@ -8,7 +8,7 @@ export default class Main {
     private canvasComponent: CanvasComponent;
     private imagesGalleryComponent: ImagesGalleryComponent;
     private imagesLevelComponent: ImagesLevelComponent;
-    public static url: string =  window.location.href;
+    public static url: string = window.location.href;
     public static urlLength: number = Main.url.length;
 
 
