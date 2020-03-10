@@ -5,7 +5,7 @@ A Dungeons and Dragons map editor running on Node v12.15.0
 
 ## Running Locally
 
-Make sure you have [Node.js](http://nodejs.org/) and the [Heroku Toolbelt](https://toolbelt.heroku.com/) installed.
+Make sure you have [Node.js](http://nodejs.org/) installed.
 
 ```sh
 git clone https://github.com/Pho3b/DndMapEditor.git
