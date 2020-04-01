@@ -1,8 +1,5 @@
-import CanvasComponent from "./CanvasComponent.js";
 export default class AlgoComponent {
-    constructor() {
-        this.canvasComponens = CanvasComponent.getInstance();
-    }
+    // Just a test
     static binarySearchOnMatrix(matrix, key) {
         let start = 0;
         let mid, row, col;

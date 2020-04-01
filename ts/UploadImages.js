@@ -1,5 +1,5 @@
 "use strict";
-//TODO: Find a way to refactor this in typescript
+//TODO: Need to implement this in typescript
 // export default class UploadImages {
 //     private submitBtn: HTMLButtonElement = document.getElementById('images_submit_btn') as HTMLButtonElement;
 //
@@ -16,7 +16,7 @@
 //
 //         if (elementVal === "") {
 //             alert('Select at least one image');
-//         } else {
+//         } else {s
 //             let form : HTMLFormElement | null = document.getElementById('images_upload_form') as HTMLFormElement || null;
 //             if (form)
 //                 form.submit();
