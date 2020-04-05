@@ -26,7 +26,7 @@ module.exports = {
         let res = [];
 
         files.forEach(function (item) {
-            if (item.split('.')[1] !== undefined) {
+            if (item[0] !== '.' && item.split('.')[1] !== undefined) {
                 res.push(item);
             }
         });
