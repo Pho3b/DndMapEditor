@@ -19,14 +19,19 @@ export default class Square {
         this.canvasComponent.ctx.fillRect(this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
         this.canvasComponent.ctx.strokeRect(this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
     }
+    setImageOnDrag(selectedImageSrc) {
+        // @ts-ignore
+        this.levelImages[2].src = selectedImageSrc;
+    }
     setImage(load = false) {
+        if (ImagesGalleryComponent.selectedImage === undefined) alert('Select an Image');
+
         if (ImagesLevelComponent.selectedLevel === ImagesLevel.level1) {
             if (this.levelImages[0].src.length === Main.urlLength) {
                 // @ts-ignore
                 this.levelImages[0].src = ImagesGalleryComponent.selectedImage.src;
             }
             else {
-                console.log('reset1');
                 this.levelImages[0].src = Main.url;
             }
         }
@@ -36,7 +41,6 @@ export default class Square {
                 this.levelImages[1].src = ImagesGalleryComponent.selectedImage.src;
             }
             else {
-                console.log('reset2');
                 this.levelImages[1].src = Main.url;
             }
         }
@@ -69,18 +73,12 @@ export default class Square {
         this.colorSquare();
         if (this.levelImages[0].src.length !== Main.urlLength) {
             this.canvasComponent.ctx.drawImage(this.levelImages[0], this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
-            console.log(1);
-            console.log(this.levelImages[0].src);
         }
         if (this.levelImages[1].src.length !== Main.urlLength) {
             this.canvasComponent.ctx.drawImage(this.levelImages[1], this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
-            console.log(2);
-            console.log(this.levelImages[1].src);
         }
         if (this.levelImages[2].src.length !== Main.urlLength) {
             this.canvasComponent.ctx.drawImage(this.levelImages[2], this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
-            console.log(3);
-            console.log(this.levelImages[2].src);
         }
     }
     deleteImages() {

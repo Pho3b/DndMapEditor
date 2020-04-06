@@ -3,6 +3,8 @@ import MousePos from "./MousePos.js";
 import AlgoComponent from "./AlgoComponent.js";
 import Square from "./Square.js";
 import Persister from "./Persister.js";
+import ImagesLevelComponent, {ImagesLevel} from "./ImagesLevelComponent.js";
+import Main from "./Main.js";
 
 export default class CanvasEventHandlers {
     private static instance: CanvasEventHandlers;
@@ -11,6 +13,9 @@ export default class CanvasEventHandlers {
     private canvasComponent: CanvasComponent;
     private clientRect: ClientRect;
     private currentUrl: string = window.location.href;
+    private static isMousePressed: boolean = false;
+    private imgToMoveSource: string = '';
+    private static clickedSquare: Square;
 
 
     constructor() {
@@ -30,23 +35,58 @@ export default class CanvasEventHandlers {
 
     public initEventHandlers(canvas: HTMLCanvasElement) {
         this.canvas.addEventListener("mousedown", this.mouseDownEventHandler);
+        document.addEventListener("mouseup", this.mouseUpEventHandler);
         document.addEventListener("keydown", this.keyDownEventListener);
+
         let saveMapBtn: HTMLButtonElement = document.getElementById('save_map_btn') as HTMLButtonElement;
         saveMapBtn.addEventListener('click', () => Persister.saveMap(this.canvasComponent.squaresMatrix));
+    };
+
+    private mouseUpEventHandler = (e: MouseEvent) => {
+        if (CanvasEventHandlers.isMousePressed) {
+            let rect = this.canvas.getBoundingClientRect();
+            let mousePos: MousePos = new MousePos(e.clientX - rect.left, e.clientY - rect.top);
+            let releasedSquare: Square | undefined = AlgoComponent.findClickedSquare(this.canvasComponent.squaresMatrix, mousePos, this.canvasComponent.squareWidth, this.canvasComponent.signalCellWidth);
+
+            if (
+                releasedSquare !== undefined &&
+                this.imgToMoveSource &&
+                ImagesLevelComponent.selectedLevel === ImagesLevel.level3 &&
+                !(CanvasEventHandlers.clickedSquare.yMin === releasedSquare.yMin && CanvasEventHandlers.clickedSquare.xMin === releasedSquare.xMin)
+            ) {
+                releasedSquare.setImageOnDrag(this.imgToMoveSource);
+            } else {
+                console.log("Undefined square on mouseup");
+            }
+
+            this.imgToMoveSource = Main.url;
+        }
+
+
+        CanvasEventHandlers.isMousePressed = false;
     };
 
     private mouseDownEventHandler = (e: MouseEvent) => {
         let rect = this.canvas.getBoundingClientRect();
         let mousePos: MousePos = new MousePos(e.clientX - rect.left, e.clientY - rect.top);
-        let clickedSquare: Square | undefined = AlgoComponent.findClickedSquare(this.canvasComponent.squaresMatrix, mousePos, this.canvasComponent.squareWidth, this.canvasComponent.signalCellWidth);
+        CanvasEventHandlers.clickedSquare = AlgoComponent.findClickedSquare(this.canvasComponent.squaresMatrix, mousePos, this.canvasComponent.squareWidth, this.canvasComponent.signalCellWidth);
 
-        if (clickedSquare !== undefined) {
-            if (CanvasEventHandlers.drawOrDelete)
-                clickedSquare.setImage();
-            else
-                clickedSquare.deleteImages();
+        if (CanvasEventHandlers.clickedSquare !== undefined) {
+            if (CanvasEventHandlers.drawOrDelete) {
+                // Checking if we're on the third level so that we simulate the 'drag' effect by saving the just removed image
+                if (ImagesLevelComponent.selectedLevel === ImagesLevel.level3 && CanvasEventHandlers.clickedSquare.levelImages[2].src !== Main.url) {
+                    this.imgToMoveSource = CanvasEventHandlers.clickedSquare.levelImages[2].src;
+                    setTimeout(() => {
+                        CanvasEventHandlers.isMousePressed = true;
+                    }, 150);
+                }
+
+                CanvasEventHandlers.clickedSquare.setImage();
+            } else {
+                CanvasEventHandlers.clickedSquare.deleteImages();
+            }
         } else {
-            console.log("Undefined square, which one should i color ?");
+            console.log("Undefined square on mousedown");
         }
     };
 
@@ -58,7 +98,6 @@ export default class CanvasEventHandlers {
 
         if (key === 'Control' || key === 17) {
             this.toggleDrawOrDelete();
-            console.log(this.canvasComponent.squaresMatrix[0][0])
         }
     };
 
