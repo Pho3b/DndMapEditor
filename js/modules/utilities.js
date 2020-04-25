@@ -1,12 +1,11 @@
 const fs = require('fs');
 const path = require('path');
+const server = require('../../server');
 
 module.exports = {
-
     retrieveImagesFoldersNames: function () {
-        let images_folder = path.join(__dirname, '../../images/');
         let res = [];
-        let files = fs.readdirSync(images_folder);
+        let files = fs.readdirSync(server.base_path);
 
         files.forEach(function (item) {
             if (item.split('.')[1] === undefined) {
@@ -21,7 +20,7 @@ module.exports = {
         if (folder === '')
             return;
 
-        let my_path = path.join(__dirname, '../../images/' + folder);
+        let my_path = path.join(server.base_path + folder);
         let files = fs.readdirSync(my_path);
         let res = [];
 
@@ -33,5 +32,4 @@ module.exports = {
 
         return res;
     }
-
 };

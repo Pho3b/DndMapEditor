@@ -2,6 +2,7 @@ const express = require('express');
 const server = express();
 const bodyParser = require('body-parser');
 const utilities = require('./js/modules/utilities');
+const path = require('path');
 const fileUpload = require('express-fileupload');
 const post_images_uploader = require('./js/modules/post_images_uploader');
 const retrieve_files = require('./js/modules/retrieve_files');
@@ -9,8 +10,12 @@ const persister = require('./js/modules/persister');
 const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
 const port = 3000;
+const base_path = path.join(__dirname, '/images/');
 
 
+/**
+ * Server Configurations
+ */
 server.set('view engine', 'ejs');
 server.set('views', __dirname + '/views');
 server.use(
@@ -25,6 +30,9 @@ server.listen(process.env.PORT || port, function () {
     console.log('App listening on port ' + port + '!');
 });
 
+/**
+ * Routing configurations
+ */
 server.get('/', function (req, res) {
     res.render('index', {folders: utilities.retrieveImagesFoldersNames()});
 });
@@ -50,9 +58,12 @@ server.get('/load_map', function (req, res) {
     persister.loadMap(res);
 });
 
+/**
+ * Additional Configurations
+ */
 server.use('/img', express.static(__dirname + '/images/'));
 server.use('/css', express.static(__dirname + '/css/'));
 server.use('/js', express.static(__dirname + '/js/'));
 server.use('/ts', express.static(__dirname + '/ts/'));
 
-module.exports = server;
+module.exports.base_path = base_path;
