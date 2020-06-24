@@ -26,7 +26,7 @@ export default class ImagesGalleryComponent {
                     img.addEventListener('click', ImagesGalleryComponent.imageClickEventHandler);
                 }
                 images_gallery.appendChild(fragment);
-                $(document).ready(function () {
+                $(function () {
                     // @ts-ignore
                     $('[data-toggle="tooltip"]').tooltip();
                 });

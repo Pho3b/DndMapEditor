@@ -20,12 +20,11 @@ export default class Square {
         this.canvasComponent.ctx.strokeRect(this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
     }
     setImageOnDrag(selectedImageSrc) {
-        // @ts-ignore
         this.levelImages[2].src = selectedImageSrc;
     }
     setImage(load = false) {
-        if (ImagesGalleryComponent.selectedImage === undefined) alert('Select an Image');
-
+        if (ImagesGalleryComponent.selectedImage === undefined)
+            alert('Select an Image');
         if (ImagesLevelComponent.selectedLevel === ImagesLevel.level1) {
             if (this.levelImages[0].src.length === Main.urlLength) {
                 // @ts-ignore

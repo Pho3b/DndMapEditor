@@ -31,8 +31,7 @@ export default class Square {
     }
 
     public setImageOnDrag(selectedImageSrc: string) {
-            // @ts-ignore
-            this.levelImages[2].src = selectedImageSrc;
+        this.levelImages[2].src = selectedImageSrc;
     }
 
     public setImage(load: boolean = false): any {

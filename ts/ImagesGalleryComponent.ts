@@ -36,7 +36,7 @@ export default class ImagesGalleryComponent {
                 }
                 images_gallery.appendChild(fragment);
 
-                $(document).ready(function () {
+                $(function () {
                     // @ts-ignore
                     $('[data-toggle="tooltip"]').tooltip();
                 });

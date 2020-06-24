@@ -3,7 +3,7 @@ import MousePos from "./MousePos.js";
 
 export default class AlgoComponent {
     private static COL: number = 10;
-    private static ROWS = 10;
+    private static ROWS: number = 10;
 
 
     // Just a test
