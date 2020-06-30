@@ -2,6 +2,9 @@ import CanvasComponent from "./CanvasComponent.js";
 import ImagesLevelComponent, {ImagesLevel} from "./ImagesLevelComponent.js";
 import ImagesGalleryComponent from "./ImagesGalleryComponent.js";
 import Main from "./Main.js";
+import {SquareOnMouseDownStrategy} from "./SquareStrategy/SquareOnMouseDownStrategy";
+import {SetImageStrategy} from "./SquareStrategy/SetImageStrategy";
+import compileStreaming = WebAssembly.compileStreaming;
 
 export default class Square {
     private canvasComponent: CanvasComponent;
@@ -11,6 +14,7 @@ export default class Square {
     public xMax: number;
     public yMax: number;
     public levelImages: HTMLImageElement[] = [];
+    private onMouseDownStrategy: SquareOnMouseDownStrategy;
 
 
     public constructor(xMin: number, yMin: number, canvasComponent: CanvasComponent) {
@@ -22,6 +26,8 @@ export default class Square {
         this.levelImages[0] = new Image();
         this.levelImages[1] = new Image();
         this.levelImages[2] = new Image();
+
+        this.onMouseDownStrategy = new SetImageStrategy();
     }
 
     public colorSquare(color: string = this.defaultColor) {
@@ -34,41 +40,12 @@ export default class Square {
         this.levelImages[2].src = selectedImageSrc;
     }
 
-    public setImage(load: boolean = false): any {
-        if (ImagesGalleryComponent.selectedImage === undefined)
-            alert('Select an Image');
+    public setOnMouseDownStrategy(strategy: SquareOnMouseDownStrategy) {
+        this.onMouseDownStrategy = strategy;
+    }
 
-        if (ImagesLevelComponent.selectedLevel === ImagesLevel.level1) {
-            if (this.levelImages[0].src.length === Main.urlLength) {
-                // @ts-ignore
-                this.levelImages[0].src = ImagesGalleryComponent.selectedImage.src;
-            } else {
-                this.levelImages[0].src = Main.url;
-            }
-        }
-
-        if (ImagesLevelComponent.selectedLevel === ImagesLevel.level2) {
-            if (this.levelImages[1].src.length === Main.urlLength) {
-                // @ts-ignore
-                this.levelImages[1].src = ImagesGalleryComponent.selectedImage.src;
-            } else {
-                this.levelImages[1].src = Main.url;
-            }
-        }
-
-        if (ImagesLevelComponent.selectedLevel === ImagesLevel.level3) {
-            if (this.levelImages[2].src.length === Main.urlLength) {
-                // @ts-ignore
-                this.levelImages[2].src = ImagesGalleryComponent.selectedImage.src;
-            } else {
-                this.levelImages[2].src = Main.url;
-            }
-        }
-
-        if (!load)
-            this.drawImages();
-        else
-            this.loadImages();
+    public onMouseDown() {
+        this.onMouseDownStrategy.onMouseDown(this);
     }
 
     public loadImages(): any {
@@ -84,7 +61,7 @@ export default class Square {
         }
     }
 
-    private drawImages(): any {
+    public drawImages(): any {
         this.colorSquare();
 
         if (this.levelImages[0].src.length !== Main.urlLength) {
@@ -98,13 +75,5 @@ export default class Square {
         if (this.levelImages[2].src.length !== Main.urlLength) {
             this.canvasComponent.ctx.drawImage(this.levelImages[2], this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
         }
-    }
-
-    public deleteImages(): void {
-        this.levelImages[0].src = Main.url;
-        this.levelImages[1].src = Main.url;
-        this.levelImages[2].src = Main.url;
-
-        this.colorSquare();
     }
 }

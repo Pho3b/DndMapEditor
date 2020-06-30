@@ -1,6 +1,5 @@
-import ImagesLevelComponent, { ImagesLevel } from "./ImagesLevelComponent.js";
-import ImagesGalleryComponent from "./ImagesGalleryComponent.js";
 import Main from "./Main.js";
+import { SetImageStrategy } from "./SquareStrategy/SetImageStrategy";
 export default class Square {
     constructor(xMin, yMin, canvasComponent) {
         this.defaultColor = "#eff9f9";
@@ -13,6 +12,7 @@ export default class Square {
         this.levelImages[0] = new Image();
         this.levelImages[1] = new Image();
         this.levelImages[2] = new Image();
+        this.onMouseDownStrategy = new SetImageStrategy();
     }
     colorSquare(color = this.defaultColor) {
         this.canvasComponent.ctx.fillStyle = color;
@@ -22,40 +22,11 @@ export default class Square {
     setImageOnDrag(selectedImageSrc) {
         this.levelImages[2].src = selectedImageSrc;
     }
-    setImage(load = false) {
-        if (ImagesGalleryComponent.selectedImage === undefined)
-            alert('Select an Image');
-        if (ImagesLevelComponent.selectedLevel === ImagesLevel.level1) {
-            if (this.levelImages[0].src.length === Main.urlLength) {
-                // @ts-ignore
-                this.levelImages[0].src = ImagesGalleryComponent.selectedImage.src;
-            }
-            else {
-                this.levelImages[0].src = Main.url;
-            }
-        }
-        if (ImagesLevelComponent.selectedLevel === ImagesLevel.level2) {
-            if (this.levelImages[1].src.length === Main.urlLength) {
-                // @ts-ignore
-                this.levelImages[1].src = ImagesGalleryComponent.selectedImage.src;
-            }
-            else {
-                this.levelImages[1].src = Main.url;
-            }
-        }
-        if (ImagesLevelComponent.selectedLevel === ImagesLevel.level3) {
-            if (this.levelImages[2].src.length === Main.urlLength) {
-                // @ts-ignore
-                this.levelImages[2].src = ImagesGalleryComponent.selectedImage.src;
-            }
-            else {
-                this.levelImages[2].src = Main.url;
-            }
-        }
-        if (!load)
-            this.drawImages();
-        else
-            this.loadImages();
+    setOnMouseDownStrategy(strategy) {
+        this.onMouseDownStrategy = strategy;
+    }
+    onMouseDown() {
+        this.onMouseDownStrategy.onMouseDown(this);
     }
     loadImages() {
         let counter = 0;
@@ -79,11 +50,5 @@ export default class Square {
         if (this.levelImages[2].src.length !== Main.urlLength) {
             this.canvasComponent.ctx.drawImage(this.levelImages[2], this.xMin, this.yMin, this.canvasComponent.squareWidth, this.canvasComponent.squareHeight);
         }
-    }
-    deleteImages() {
-        this.levelImages[0].src = Main.url;
-        this.levelImages[1].src = Main.url;
-        this.levelImages[2].src = Main.url;
-        this.colorSquare();
     }
 }
