@@ -5,6 +5,8 @@ import Square from "./Square.js";
 import Persister from "./Persister.js";
 import ImagesLevelComponent, {ImagesLevel} from "./ImagesLevelComponent.js";
 import Main from "./Main.js";
+import {SetImageStrategy} from "./SquareStrategy/SetImageStrategy";
+import {DeleteImageStrategy} from "./SquareStrategy/DeleteImageStrategy";
 
 export default class CanvasEventHandlers {
     private static instance: CanvasEventHandlers;
@@ -81,10 +83,12 @@ export default class CanvasEventHandlers {
                     }, 150);
                 }
 
-                CanvasEventHandlers.clickedSquare.setImage();
+                CanvasEventHandlers.clickedSquare.setOnMouseDownStrategy(new SetImageStrategy());
             } else {
-                CanvasEventHandlers.clickedSquare.deleteImages();
+                CanvasEventHandlers.clickedSquare.setOnMouseDownStrategy(new DeleteImageStrategy());
             }
+
+            CanvasEventHandlers.clickedSquare.onMouseDown();
         } else {
             console.log("Undefined square on mousedown");
         }
